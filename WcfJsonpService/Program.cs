@@ -25,7 +25,7 @@ namespace PVIB
     class Program
     {
         static private Thread ServerThread;
-        static private Dictionary<string, Service> ServList;
+        static public Dictionary<string, Service> ServList;
 
         static void ListenClient()
         {

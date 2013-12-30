@@ -45,12 +45,12 @@ namespace PVIB
         bool watch_var(string srvname, string cpuname, string varname);
 
         [OperationContract]
-        [WebGet(UriTemplate = "watch_var/?getvar={srvname}&cpuname={cpuname}&varname={varname}",
+        [WebGet(UriTemplate = "get_var/?getvar={srvname}&cpuname={cpuname}&varname={varname}",
             ResponseFormat = WebMessageFormat.Json)]
         string get_var(string srvname, string cpuname, string varname);
 
         [OperationContract]
-        [WebGet(UriTemplate = "watch_var/?setvar={srvname}&cpuname={cpuname}&varname={varname}&varval={varval}",
+        [WebGet(UriTemplate = "set_var/?setvar={srvname}&cpuname={cpuname}&varname={varname}&varval={varval}",
             ResponseFormat = WebMessageFormat.Json)]
         bool set_var(string srvname, string cpuname, string varname, object varval);
     }

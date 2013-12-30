@@ -17,9 +17,9 @@ using BR.AN;
 
 namespace PVIBroker
 {
-    
 
-    public class ExampleJsonpService : IExampleJsonpService
+
+    public class PVIBJsonpService : IPVIBJsonpService
     {
         public string GetWithOne(string input)
         {
@@ -33,6 +33,10 @@ namespace PVIBroker
 
         public bool mkservice(string srvname)
         {
+            Service srv = new Service(srvname);
+            srv.Connect();
+            Form1.ServList.Add(srvname,srv);
+           // Program.ServList.Add(srvname,srv);
             return true;
         }
 

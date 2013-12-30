@@ -8,7 +8,7 @@
         $(document).ready(function () {
             $('#testButtonGetOne').click(function () {
                 $.ajax({
-                    url: 'http://localhost/exampleService/GetWithOne/FirstString',
+                    url: 'http://localhost/PVIBService/GetWithOne/FirstString',
                     success: function (data) {
                         alert(data);
                     }
@@ -17,7 +17,7 @@
 
             $('#testButtonGetTwo').click(function () {
                 $.ajax({
-                    url: 'http://localhost/exampleService/GetWithTwo/?input1=FirstString&input2=SecondString',
+                    url: 'http://localhost/PVIBService/GetWithTwo/?input1=FirstString&input2=SecondString',
                     success: function (data) {
                         alert(data);
                     }
@@ -116,12 +116,30 @@
                     },
 					dataType: 'jsonp'
                 });
-            });			
+            });
+
+
+            $('#mkserv').click(function () {
+                alert('http://localhost/PVIBService/mkservice?srvname='+$("#servname").val());
+
+                $.ajax({
+                    url: 'http://localhost/PVIBService/mkservice?srvname='+$("#servname").val(),
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+
+
+
         });
     </script>
 </head>
 <body>
     <form id="testForm">
+
+          <input type="button" id="mkserv" value="make service" />
+          <input type="text" id="servname" />
 
 		<h2>JSONP Examples (accessing a service on a different host)</h2>
 		<input type="button" id="textButtonJsonpGetOne" value="Get with one parameter" />

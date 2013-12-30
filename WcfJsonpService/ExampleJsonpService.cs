@@ -33,6 +33,9 @@ namespace PVIB
 
         public bool mkservice(string srvname)
         {
+            Service srv = new Service(srvname);
+            srv.Connect();
+            Program.ServList.Add(srvname,srv);
             return true;
         }
 
