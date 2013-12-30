@@ -18,16 +18,18 @@ using System.ServiceModel.Web;
 using BR.AN.PviServices;
 using BR.AN;
 using System.Threading;
+using System.Collections.Generic;
 
-namespace WcfJsonpService
+namespace PVIB
 {   
     class Program
     {
         static private Thread ServerThread;
+        static private Dictionary<string, Service> ServList;
 
         static void ListenClient()
         {
-            using (var serviceHost = new WebServiceHost(typeof(ExampleJsonpService)))
+            using (var serviceHost = new WebServiceHost(typeof(PVIBJsonpService)))
             {
                 serviceHost.Open();
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfJsonpService", "WcfJsonpService\WcfJsonpService.csproj", "{53CEF922-50BF-437C-90ED-D935ECEEE173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVIBCon", "WcfJsonpService\PVIBCon.csproj", "{53CEF922-50BF-437C-90ED-D935ECEEE173}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVIBroker", "PVIBroker\PVIBroker.csproj", "{5102F602-8517-4EF3-AF35-BFBA9B73A1D9}"
 EndProject
