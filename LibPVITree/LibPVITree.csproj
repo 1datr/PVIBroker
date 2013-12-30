@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BR.AN.PVIServices">
+      <HintPath>..\..\..\..\..\..\..\BrAutomation\PVI\V3.00.02\PVI\PviServices\VS2008\win32\BR.AN.PVIServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="CPUWatcher.cs" />
+    <Compile Include="CPUWatcher.designer.cs">
+      <DependentUpon>CPUWatcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVITree_CPU.cs" />
     <Compile Include="PVITree_Root.cs" />

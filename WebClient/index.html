@@ -6,131 +6,30 @@
     <script type="text/javascript" src="json2.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#testButtonGetOne').click(function () {
-                $.ajax({
-                    url: 'http://localhost/PVIBService/GetWithOne/FirstString',
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
-            });
 
-            $('#testButtonGetTwo').click(function () {
-                $.ajax({
-                    url: 'http://localhost/PVIBService/GetWithTwo/?input1=FirstString&input2=SecondString',
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
-            });
 
-            $('#testButtonPostZero').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://localhost/exampleService/PostWithZero/',
-                    success: function (data) {
-                        alert(data);
-                    },
-                    dataType: 'json'
-                });
-            });
-
-            $('#testButtonPostOnePrim').click(function () {
-                var data1 = {
-                    "input": "This is the primitive (string)",
-                };
-				// We need to turn this object into JSON.  I use the JSON2.js library for this.
-                var json = JSON.stringify(data1);
-
-                $.ajax({
-                    type: 'POST',
-                    data: json,
-                    url: 'http://localhost/exampleService/PostWithOnePrim/',
-                    success: function (data) {
-                        alert(data);
-                    },
-                    contentType: "application/json",
-                    dataType: 'json'
-                });
-            });
-
-			$('#testButtonPostWithComp').click(function () {
-                var data1 = { 
-                    "testInfo": {
-                        "Property1": true,
-                        "Property2": "This is property 2"
-                    }
-                };
-				// We need to turn this object into JSON.  I use the JSON2.js library for this.
-                var json = JSON.stringify(data1);
-
-                $.ajax({
-                    type: 'POST',
-                    data: json,
-                    url: 'http://localhost/exampleService/PostWithCompositeType/',
-                    success: function (data) {
-                        alert(data);
-                    },
-                    contentType: "application/json",
-                    dataType: 'json'
-                });
-            });
-
-            $('#testButtonPostWithComps').click(function () {
-                var data1 = { 
-                    "testInfo": {
-                        "Property1": true,
-                        "Property2": "This is property 2"
-                    }
-                };
-				// We need to turn this object into JSON.  I use the JSON2.js library for this.
-                var json = JSON.stringify(data1);
-
-                $.ajax({
-                    type: 'POST',
-                    data: json,
-                    url: 'http://localhost/exampleService/PostWithComposites/',
-                    success: function (data) {
-                        alert("Property1: " + data.Property1 + "\r\nProperty2: " + data.Property2);
-                    },
-                    contentType: "application/json",
-                    dataType: 'json'
-                });
-            });
-
-            $('#textButtonJsonpGetOne').click(function () {
-                $.ajax({
-                    url: 'http://localhost:8080/exampleJsonpService/GetWithOne/FirstString',
+            $('#mkserv').click(function () {
+                 $.ajax({
+                    url: 'http://localhost:8080/PVIBService/mkservice/?srvname='+$("#servname").val(),
                     success: function (data) {
                         alert(data);
                     },
                     dataType: 'jsonp'
                 });
             });
-			
-            $('#textButtonJsonpGetTwo').click(function () {
-                $.ajax({
-                    url: 'http://localhost:8080/exampleJsonpService/GetWithTwo/?input1=FirstString&input2=SecondString',
+
+            $('#cpu').click(function () {
+                 $.ajax({
+                    url: 'http://localhost:8080/PVIBService/connect_cpu_tcpip/?srvname='
+                         +$("#servname").val()+'&ip='+$("#cpuip").val()+
+                         '&port='+$("#cpuport").val()+
+                         '&cpuname='+$("#cpuname").val(),
                     success: function (data) {
                         alert(data);
                     },
-					dataType: 'jsonp'
+                    dataType: 'jsonp'
                 });
             });
-
-
-            $('#mkserv').click(function () {
-                alert('http://localhost/PVIBService/mkservice?srvname='+$("#servname").val());
-
-                $.ajax({
-                    url: 'http://localhost/PVIBService/mkservice?srvname='+$("#servname").val(),
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
-            });
-
-
 
         });
     </script>
@@ -140,11 +39,11 @@
 
           <input type="button" id="mkserv" value="make service" />
           <input type="text" id="servname" />
-
-		<h2>JSONP Examples (accessing a service on a different host)</h2>
-		<input type="button" id="textButtonJsonpGetOne" value="Get with one parameter" />
-		<br />
-		<input type="button" id="textButtonJsonpGetTwo" value="Get with two parameters" />
+          <br />
+          <input type="button" id="cpu" value="make service" />
+          <input type="text" id="cpuip" value="127.0.0.1" />
+          <input type="text" id="cpuport" value="11160" />
+          <input type="text" id="cpuname" value="" />
     </form>
 </body>
 </html>

@@ -14,40 +14,33 @@
 using System;
 using BR.AN.PviServices;
 using BR.AN;
+using LibPVITree;
 
 namespace PVIBroker
 {
-
-
     public class PVIBJsonpService : IPVIBJsonpService
     {
-        public string GetWithOne(string input)
+        private bool wait_connect = false;
+        
+        public int mkservice(string srvname)
         {
-            return String.Format("The (jsonp) input string was: {0}", input);
+            Form1.Root.addService(srvname);
+            return 0;
         }
 
-        public string GetWithTwo(string input1, string input2)
+        public int connect_cpu_tcpip(string srvname, string ip, int port, string cpuname)
         {
-            return String.Format("(jsonp) Input one: {0}, Input two: {1}", input1, input2);
+            /*Cpu cpu = new Cpu(Form1.ServList[srvname],cpuname);
+            cpu.Connection.DeviceType = DeviceType.TcpIp;
+            cpu.Connection.TcpIp.DestinationIpAddress = ip;
+            cpu.Connection.TcpIp.DestinationPort = short.Parse(port.ToString());
+            cpu.Connect();*/
+            return 0;
         }
 
-        public bool mkservice(string srvname)
+        public int watch_var(string srvname, string cpuname, string varname)
         {
-            Service srv = new Service(srvname);
-            srv.Connect();
-            Form1.ServList.Add(srvname,srv);
-           // Program.ServList.Add(srvname,srv);
-            return true;
-        }
-
-        public bool connect_cpu_tcpip(string srvname, string ip, int port, string cpuname)
-        {
-            return true;
-        }
-
-        public bool watch_var(string srvname, string cpuname, string varname)
-        {
-            return true;
+            return 0;
         }
 
         public string get_var(string srvname, string cpuname, string varname) 
@@ -55,9 +48,19 @@ namespace PVIBroker
             return "";
         }
 
-        public bool set_var(string srvname, string cpuname, string varname, object varval) 
+        public int set_var(string srvname, string cpuname, string varname, object varval) 
         {
-            return true;
+            return 0;
+        }
+
+        void Error(object sender, PviEventArgs e)
+        {
+            wait_connect = false;
+        }
+
+        void service_Connected(object sender, PviEventArgs e)
+        {
+            wait_connect = false;
         }
     }
 }
