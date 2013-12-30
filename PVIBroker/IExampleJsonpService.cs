@@ -28,5 +28,30 @@ namespace PVIBroker
         [WebGet(UriTemplate = "GetWithTwo/?input1={input1}&input2={input2}",
             ResponseFormat = WebMessageFormat.Json)]
         string GetWithTwo(string input1, string input2);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "mkservice/?srvname={srvname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        bool mkservice(string srvname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "connect_cpu_tcpip/?srvname={srvname}&ip={ip}&port={port}&cpuname={cpuname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        bool connect_cpu_tcpip(string srvname,string ip, int port, string cpuname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "watch_var/?srvname={srvname}&cpuname={cpuname}&varname={varname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        bool watch_var(string srvname, string cpuname, string varname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "watch_var/?getvar={srvname}&cpuname={cpuname}&varname={varname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        string get_var(string srvname, string cpuname, string varname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "watch_var/?setvar={srvname}&cpuname={cpuname}&varname={varname}&varval={varval}",
+            ResponseFormat = WebMessageFormat.Json)]
+        bool set_var(string srvname, string cpuname, string varname, object varval);
     }
 }

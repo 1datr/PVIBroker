@@ -11,9 +11,13 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+using System;
+using BR.AN.PviServices;
+using BR.AN;
+
 namespace PVIBroker
 {
-    using System;
+    
 
     public class ExampleJsonpService : IExampleJsonpService
     {
@@ -25,6 +29,31 @@ namespace PVIBroker
         public string GetWithTwo(string input1, string input2)
         {
             return String.Format("(jsonp) Input one: {0}, Input two: {1}", input1, input2);
+        }
+
+        public bool mkservice(string srvname)
+        {
+            return true;
+        }
+
+        public bool connect_cpu_tcpip(string srvname, string ip, int port, string cpuname)
+        {
+            return true;
+        }
+
+        public bool watch_var(string srvname, string cpuname, string varname)
+        {
+            return true;
+        }
+
+        public string get_var(string srvname, string cpuname, string varname) 
+        {
+            return "";
+        }
+
+        public bool set_var(string srvname, string cpuname, string varname, object varval) 
+        {
+            return true;
         }
     }
 }
