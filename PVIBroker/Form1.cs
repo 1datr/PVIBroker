@@ -75,5 +75,10 @@ namespace PVIBroker
             else
                 Varlist.Add(varidx, var);
         }
+
+        private void входToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

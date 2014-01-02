@@ -56,7 +56,46 @@ namespace PVIBroker
             if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
             {                
                 //Form1.Varlist[srvname + "_" + varname].Value = varval;
-                Form1.Varlist[srvname + "_" + varname].Value = 1;
+             //   Form1.Varlist[srvname + "_" + varname].IECDataType == IECDataTypes.
+                object obj = null;
+                switch (Form1.Varlist[srvname + "_" + varname].Value.DataType)
+                {
+                    case DataType.Boolean: break;
+                    case DataType.Byte: break;
+                    case DataType.Data: break;
+                    case DataType.Date: break;
+                    case DataType.DateTime: break;
+                    case DataType.Double: break;
+                    case DataType.DT: break;
+                    case DataType.DWORD: break;
+                    case DataType.Int16: break;
+                    case DataType.Int32: break;
+                    case DataType.Int64: break;
+                    case DataType.LWORD: break;
+                    case DataType.SByte: break;
+                    case DataType.Single: break;
+                    case DataType.String: break;
+                    case DataType.TimeOfDay: break;
+                    case DataType.TimeSpan: break;
+                    case DataType.TOD: break;
+                    case DataType.UInt16:
+                        obj = System.Convert.ToInt16(varval);
+                        break;
+                    case DataType.UInt32:
+                        obj = System.Convert.ToInt32(varval);
+                        break;
+                    case DataType.UInt64:
+                        obj = System.Convert.ToInt64(varval);
+                        break;
+                    case DataType.UInt8:
+                        obj = uint.Parse(varval);
+                        break;
+                    case DataType.WORD:
+                        obj = System.Convert.ToInt32(varval);
+                        break;
+                    case DataType.WString: break;
+                }
+                Form1.Varlist[srvname + "_" + varname].Value = new Value(obj);
             }
             else
                 return -1;
