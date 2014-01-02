@@ -5,31 +5,50 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
     <script type="text/javascript" src="json2.js"></script>
     <script type="text/javascript">
+    function Pos() {
+                 $.ajax({
+                    url: 'http://localhost:8080/PVIBService/get_var/?srvname=srv1&varname=gOPC.Output.Xpos',
+                    success: function (data) {
+                        $("#Xpos").html(data);
+                    },
+                    dataType: 'jsonp'
+                });
+                $.ajax({
+                    url: 'http://localhost:8080/PVIBService/get_var/?srvname=srv1&varname=gOPC.Output.Ypos',
+                    success: function (data) {
+                        $("#Ypos").html(data);
+                    },
+                    dataType: 'jsonp'
+                });
+                $.ajax({
+                    url: 'http://localhost:8080/PVIBService/get_var/?srvname=srv1&varname=gOPC.Output.Zpos',
+                    success: function (data) {
+                        $("#Zpos").html(data);
+                        timerOnce = window.setTimeout("Pos();", 1000);
+                    },
+                    dataType: 'jsonp'
+                });
+                }
+
         $(document).ready(function () {
 
 
-            $('#mkserv').click(function () {
-                 $.ajax({
-                    url: 'http://localhost:8080/PVIBService/mkservice/?srvname='+$("#servname").val(),
-                    success: function (data) {
-                        alert(data);
-                    },
-                    dataType: 'jsonp'
-                });
-            });
+            Pos();
+            $("#setdestx").click(
 
-            $('#cpu').click(function () {
-                 $.ajax({
-                    url: 'http://localhost:8080/PVIBService/connect_cpu_tcpip/?srvname='
-                         +$("#servname").val()+'&ip='+$("#cpuip").val()+
-                         '&port='+$("#cpuport").val()+
-                         '&cpuname='+$("#cpuname").val(),
-                    success: function (data) {
-                        alert(data);
-                    },
+            function(){
+
+                    var theurl = 'http://localhost:8080/PVIBService/set_var/?srvname=srv1&varname=gOPC.Input.dst_cell&varval='+$('#cell_dest').val();
+                  //  alert(theurl);
+                    $.ajax({
+                            url: theurl,
+                            success: function (data) {
+                                     alert(data);
+                            },
                     dataType: 'jsonp'
                 });
-            });
+                }
+            )
 
         });
     </script>
@@ -37,13 +56,12 @@
 <body>
     <form id="testForm">
 
-          <input type="button" id="mkserv" value="make service" />
-          <input type="text" id="servname" />
+
+          <font>Xpos:&nbsp;<span id="Xpos"></span></font>
+          <font>Ypos:&nbsp;<span id="Ypos"></span></font>
+          <font>Zpos:&nbsp;<span id="Zpos"></span></font>
           <br />
-          <input type="button" id="cpu" value="make service" />
-          <input type="text" id="cpuip" value="127.0.0.1" />
-          <input type="text" id="cpuport" value="11160" />
-          <input type="text" id="cpuname" value="" />
+          <input type="text" id="cell_dest" /><input type="button" value="X dest" id="setdestx" />
     </form>
 </body>
 </html>

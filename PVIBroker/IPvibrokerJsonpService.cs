@@ -36,13 +36,13 @@ namespace PVIBroker
         int watch_var(string srvname, string cpuname, string varname);
 
         [OperationContract]
-        [WebGet(UriTemplate = "get_var/?srvname={srvname}&cpuname={cpuname}&varname={varname}",
+        [WebGet(UriTemplate = "get_var/?srvname={srvname}&varname={varname}",
             ResponseFormat = WebMessageFormat.Json)]
-        string get_var(string srvname, string cpuname, string varname);
+        string get_var(string srvname, string varname);
 
         [OperationContract]
-        [WebGet(UriTemplate = "set_var/?setvar={srvname}&cpuname={cpuname}&varname={varname}&varval={varval}",
+        [WebGet(UriTemplate = "set_var/?srvname={srvname}&varname={varname}&varval={varval}",
             ResponseFormat = WebMessageFormat.Json)]
-        int set_var(string srvname, string cpuname, string varname, object varval);
+        int set_var(string srvname, string varname, string varval);
     }
 }

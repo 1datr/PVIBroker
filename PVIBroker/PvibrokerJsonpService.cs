@@ -43,13 +43,23 @@ namespace PVIBroker
             return 0;
         }
 
-        public string get_var(string srvname, string cpuname, string varname) 
+        public string get_var(string srvname, string varname) 
         {
-            return "";
+            if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
+                return Form1.Varlist[srvname + "_" + varname].Value.ToString();
+            else
+                return null;
         }
 
-        public int set_var(string srvname, string cpuname, string varname, object varval) 
+        public int set_var(string srvname, string varname, string varval) 
         {
+            if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
+            {                
+                //Form1.Varlist[srvname + "_" + varname].Value = varval;
+                Form1.Varlist[srvname + "_" + varname].Value = 1;
+            }
+            else
+                return -1;
             return 0;
         }
 

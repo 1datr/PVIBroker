@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="CPUWatcher.cs" />
+    <Compile Include="CPUWatcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CPUWatcher.designer.cs">
       <DependentUpon>CPUWatcher.cs</DependentUpon>
     </Compile>

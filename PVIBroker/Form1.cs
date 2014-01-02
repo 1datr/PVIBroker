@@ -31,6 +31,7 @@ namespace PVIBroker
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
+            cpuWatcher1.Activate();
             backgroundWorker1.RunWorkerAsync();
             Root = new PVITree_Root();
         }
@@ -52,6 +53,27 @@ namespace PVIBroker
         static void Error(object sender, PviEventArgs e)
         {
            
+        }
+
+        public static Variable GetVar(String varname)
+        {
+            return null;
+        }
+
+        public static Dictionary<string, Variable> Varlist;
+
+        private void cpuWatcher1_OnChangeVar(Variable var)
+        {
+            propGrid1.PrintProperty(var.Name, var.Value);
+            if (Varlist == null)
+            {
+                Varlist = new Dictionary<string, Variable>();
+            }
+            String varidx = cpuWatcher1.Srvname+ "_"+var.Name.ToString();
+            if (Varlist.ContainsKey(varidx))
+                Varlist[varidx] = var;
+            else
+                Varlist.Add(varidx, var);
         }
     }
 }
