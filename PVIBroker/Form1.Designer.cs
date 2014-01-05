@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.входToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
             this.propGrid1 = new PVIBroker.PropGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +53,20 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.входToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 26);
+            // 
+            // входToolStripMenuItem
+            // 
+            this.входToolStripMenuItem.Name = "входToolStripMenuItem";
+            this.входToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.входToolStripMenuItem.Text = "&Выход";
+            this.входToolStripMenuItem.Click += new System.EventHandler(this.входToolStripMenuItem_Click);
+            // 
             // cpuWatcher1
             // 
             this.cpuWatcher1.IP = "127.0.0.1";
@@ -67,31 +81,20 @@
         "gOPC.Input.dst_cell"};
             this.cpuWatcher1.OnChangeVar += new Broker.OnVarChange(this.cpuWatcher1_OnChangeVar);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.входToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-            // 
-            // входToolStripMenuItem
-            // 
-            this.входToolStripMenuItem.Name = "входToolStripMenuItem";
-            this.входToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.входToolStripMenuItem.Text = "&Выход";
-            this.входToolStripMenuItem.Click += new System.EventHandler(this.входToolStripMenuItem_Click);
-            // 
             // propGrid1
             // 
             this.propGrid1.AllowUserToAddRows = false;
+            this.propGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.propGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.propGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.propGrid1.Location = new System.Drawing.Point(34, 12);
+            this.propGrid1.Location = new System.Drawing.Point(12, 12);
             this.propGrid1.Name = "propGrid1";
             this.propGrid1.ReadOnly = true;
-            this.propGrid1.Size = new System.Drawing.Size(364, 191);
+            this.propGrid1.Size = new System.Drawing.Size(334, 191);
             this.propGrid1.TabIndex = 0;
             // 
             // Column1
@@ -110,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 262);
+            this.ClientSize = new System.Drawing.Size(358, 262);
             this.Controls.Add(this.propGrid1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";

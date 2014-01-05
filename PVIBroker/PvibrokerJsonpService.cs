@@ -15,6 +15,8 @@ using System;
 using BR.AN.PviServices;
 using BR.AN;
 using LibPVITree;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace PVIBroker
 {
@@ -110,6 +112,121 @@ namespace PVIBroker
         void service_Connected(object sender, PviEventArgs e)
         {
             wait_connect = false;
+        }
+
+        private object GetVar(Variable V)
+        {
+            Object obj = null;
+            switch (V.Value.DataType)
+                {
+                    case DataType.Boolean:
+                        obj = System.Convert.ToBoolean(V.Value.ToString());
+                        break;
+                    case DataType.Byte:
+                        obj = System.Convert.ToByte(V.Value.ToString());
+                        break;
+                    case DataType.Data: break;
+                    case DataType.Date:
+                        obj = DateTime.Parse(V.Value.ToString());
+                        break;
+                    case DataType.DateTime:
+                        obj = System.Convert.ToDateTime(V.Value.ToString());
+                        break;
+                    case DataType.Double:
+                        obj = System.Convert.ToDouble(V.Value.ToString());
+                        break;
+                    case DataType.DT: break;
+                    case DataType.DWORD: 
+                        
+                        break;
+                    case DataType.Int16:
+                        obj = System.Convert.ToInt16(V.Value.ToString());
+                        break;
+                    case DataType.Int32:
+                        obj = System.Convert.ToInt32(V.Value.ToString());
+                        break;
+                    case DataType.Int64:
+                        obj = System.Convert.ToInt64(V.Value.ToString());
+                        break;
+                    case DataType.LWORD:
+                        obj = long.Parse(V.Value.ToString());
+                        break;
+                    case DataType.SByte:
+                        obj = System.Convert.ToSByte(V.Value.ToString());
+                        break;
+                    case DataType.Single:
+                        obj = System.Convert.ToSingle(V.Value.ToString());
+                        break;
+                    case DataType.String:
+                        obj = V.Value.ToString();
+                        break;
+                    case DataType.TimeOfDay: break;
+                    case DataType.TimeSpan: break;
+                    case DataType.TOD: break;
+                    case DataType.UInt16:
+                        obj = System.Convert.ToUInt16(V.Value.ToString());
+                        break;
+                    case DataType.UInt32:
+                        obj = System.Convert.ToUInt32(V.Value.ToString());
+                        break;
+                    case DataType.UInt64:
+                        obj = System.Convert.ToUInt64(V.Value.ToString());
+                        break;
+                    case DataType.UInt8:
+                        obj = uint.Parse(V.Value.ToString());
+                        break;
+                    case DataType.WORD:
+                        obj = System.Convert.ToInt32(V.Value.ToString());
+                        break;
+                    case DataType.WString: break;
+                }
+            return obj;
+        }
+
+        //public Dictionary<String, PVIVariable> var_list(string srvname)
+        public String var_list(string srvname)
+        {
+            Dictionary<String, PVIVariable> vars = new Dictionary<string, PVIVariable>();
+            foreach (KeyValuePair<string, Variable> kvp in Form1.Varlist)
+            {
+                PVIVariable v = new PVIVariable();
+                String varname = kvp.Key.Substring(srvname.Length + 2);
+                if (kvp.Key.Substring(0, srvname.Length + 1) == srvname + "_")
+                {
+                    v.value = this.GetVar(kvp.Value);
+                    v.changed = Form1.Changed[kvp.Key];
+                    v.name = varname;
+                }
+                vars.Add(varname, v);
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            return jss.Serialize(vars);
+            //return vars;
+        }
+
+        public String varchanged(string srvname)
+        {
+            Dictionary<String, PVIVariable> vars = new Dictionary<string, PVIVariable>();
+            foreach (KeyValuePair<string, Variable> kvp in Form1.Varlist)
+            {
+                
+                if (kvp.Key.Substring(0, srvname.Length + 1) == srvname + "_")
+                {
+                    if (Form1.Changed[kvp.Key])
+                    {
+                        String varname = kvp.Key.Substring(srvname.Length + 2);
+                        PVIVariable v = new PVIVariable();
+                        v.value = this.GetVar(kvp.Value);
+                        v.name = varname;
+                        v.changed = Form1.Changed[kvp.Key];
+                        Form1.Changed[kvp.Key] = false;
+                        vars.Add(varname, v);
+                    }
+                }
+                
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            return jss.Serialize(vars);
         }
     }
 }

@@ -30,6 +30,40 @@
                 });
                 }
 
+    function Varlist(){
+
+                    var theurl = 'http://localhost:8080/PVIBService/varlist/?srvname=srv1';
+
+                    $.ajax({
+                            url: theurl,
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                   alert(xhr.status);
+                                   alert(thrownError);
+                            },
+                            success: function (data) {
+                                  alert(data);
+                            },
+                            dataType: 'jsonp'
+                    });
+                }
+
+    function VarChanged(){
+
+                    var theurl = 'http://localhost:8080/PVIBService/varchanged/?srvname=srv1';
+
+                    $.ajax({
+                            url: theurl,
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                   alert(xhr.status);
+                                   alert(thrownError);
+                            },
+                            success: function (data) {
+                                  $("#div_changedvars").html(data);
+                            },
+                            dataType: 'jsonp'
+                    });
+                }
+
         $(document).ready(function () {
 
 
@@ -62,6 +96,11 @@
           <font>Zpos:&nbsp;<span id="Zpos"></span></font>
           <br />
           <input type="text" id="cell_dest" /><input type="button" value="X dest" id="setdestx" />
+
+          <input type="button" onclick="Varlist()" value="VARLIST" />
+
+          <input type="button" onclick="VarChanged()" value="VARCHANGED" />
+          <div id="div_changedvars"></div>
     </form>
 </body>
 </html>

@@ -11,12 +11,22 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+using System;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace PVIBroker
-{    
-
+{
+    
     [ServiceContract]
     public interface IPVIBJsonpService
     {
@@ -44,5 +54,30 @@ namespace PVIBroker
         [WebGet(UriTemplate = "set_var/?srvname={srvname}&varname={varname}&varval={varval}",
             ResponseFormat = WebMessageFormat.Json)]
         int set_var(string srvname, string varname, string varval);
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "varlist/?srvname={srvname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        //Dictionary<String, PVIVariable> var_list(string srvname);
+        String var_list(string srvname);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "varchanged/?srvname={srvname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        String varchanged(string srvname);
+        
     }
+
+    [DataContract]
+    [Serializable]
+    public class PVIVariable
+    {
+        [DataMember]
+        public bool changed;
+        [DataMember]
+        public string name;
+        [DataMember]
+        public object value;
+    }
+    
 }
