@@ -140,6 +140,23 @@ namespace PVIBroker
                 this.Hide();
             
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void aboutPVIBrokerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm af = new AboutForm();
+            af.ShowDialog();
+        }
+
+        private void aboutPVIBrokerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutForm af = new AboutForm();
+            af.ShowDialog();
+        }
         
         
     }

@@ -38,10 +38,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.aboutPVIBrokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propGrid1 = new PVIBroker.PropGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPVIBrokerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propGrid1)).BeginInit();
@@ -62,16 +65,17 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.входToolStripMenuItem});
+            this.входToolStripMenuItem,
+            this.aboutPVIBrokerToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // входToolStripMenuItem
             // 
             this.входToolStripMenuItem.Name = "входToolStripMenuItem";
-            this.входToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
-            this.входToolStripMenuItem.Text = "&Выход";
+            this.входToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.входToolStripMenuItem.Text = "&Exit";
             this.входToolStripMenuItem.Click += new System.EventHandler(this.входToolStripMenuItem_Click);
             // 
             // cpuWatcher1
@@ -91,12 +95,14 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(358, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -112,6 +118,21 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 240);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(358, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // aboutPVIBrokerToolStripMenuItem
+            // 
+            this.aboutPVIBrokerToolStripMenuItem.Name = "aboutPVIBrokerToolStripMenuItem";
+            this.aboutPVIBrokerToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.aboutPVIBrokerToolStripMenuItem.Text = "About PVI Broker";
+            this.aboutPVIBrokerToolStripMenuItem.Click += new System.EventHandler(this.aboutPVIBrokerToolStripMenuItem_Click);
             // 
             // propGrid1
             // 
@@ -141,13 +162,20 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
-            // statusStrip1
+            // aboutToolStripMenuItem
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 240);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(358, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutPVIBrokerToolStripMenuItem1});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // aboutPVIBrokerToolStripMenuItem1
+            // 
+            this.aboutPVIBrokerToolStripMenuItem1.Name = "aboutPVIBrokerToolStripMenuItem1";
+            this.aboutPVIBrokerToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.aboutPVIBrokerToolStripMenuItem1.Text = "About PVI Broker";
+            this.aboutPVIBrokerToolStripMenuItem1.Click += new System.EventHandler(this.aboutPVIBrokerToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -189,6 +217,9 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem1;
     }
 }
 
