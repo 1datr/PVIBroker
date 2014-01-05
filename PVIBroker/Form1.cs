@@ -31,14 +31,17 @@ namespace PVIBroker
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
+
             cpuWatcher1.Activate();
             backgroundWorker1.RunWorkerAsync();
             Root = new PVITree_Root();
+
+            
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            serviceHost.Close();
+        
         }
 
         private void button1_Click(object sender, System.EventArgs e)
@@ -65,6 +68,7 @@ namespace PVIBroker
 
         private void cpuWatcher1_OnChangeVar(Variable var)
         {
+            first_start = false;
             propGrid1.PrintProperty(var.Name, var.Value);
             if (Varlist == null)
             {
@@ -89,7 +93,54 @@ namespace PVIBroker
 
         private void входToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            closeapp = true;
             Application.Exit();
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.Activate();
+        }
+
+        private bool closeapp = false;
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            notifyIcon1.Visible = true;
+            if(!closeapp)
+                e.Cancel = true;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            closeapp = true;
+            Application.Exit();
+        }
+
+        private Boolean first_start = true;
+        private void Form1_Layout(object sender, LayoutEventArgs e)
+        {
+            if(first_start)
+                this.Hide();
+            
+        }
+        
+        
     }
 }
