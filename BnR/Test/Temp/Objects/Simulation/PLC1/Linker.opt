@@ -1,0 +1,1 @@
+NewProgram	-o "$(AS_CPU_PATH)/NewProgram/a.out" "$(AS_CPU_PATH)/NewProgram/NewProgram.o"  -G V4.1.2  -specs=I386specs -Wl,-q,-T,SG4.x -T SG4  --$$$newFormat$$$

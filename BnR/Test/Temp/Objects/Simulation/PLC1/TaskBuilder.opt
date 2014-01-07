@@ -1,0 +1,1 @@
+NewProgram	"$(AS_CPU_PATH)/NewProgram/NewProgram.ox" -o "$(AS_CPU_PATH)/NewProgram.br" -v V1.00.0 -f "$(AS_CPU_PATH)/Global.ofs" -T SG4  -B V4.00 -extConstants -r Cyclic4 -p 2 -s NewProgram --$$$newFormat$$$

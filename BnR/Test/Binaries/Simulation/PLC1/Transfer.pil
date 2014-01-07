@@ -1,0 +1,12 @@
+AR000 "Update", "SourcePath='..\..\..\as\system\V0400\AR000' DestinationPath='..\..\..\Temp\Simulation\Simulation\PLC1'"
+Connection "/IF=COM1 /BD=57600 /RS=0 /PA=2 /IT=20", "/RT=1000"
+Download: ".\ashwd.br", "SYSROM"
+Download: ".\asfw.br", "SYSROM"
+Download: ".\arconfig.br", "SYSROM"
+Download: ".\sysconf.br", "SYSROM"
+Warmstart
+Download: ".\runtime.br", "ROM"
+Download: ".\astime.br", "ROM"
+Download: ".\AsIecCon.br", "ROM"
+Download: ".\iomap.br", "ROM"
+Download: ".\NewProgram.br", "ROM"

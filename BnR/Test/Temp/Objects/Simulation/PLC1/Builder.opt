@@ -1,0 +1,5 @@
+AsHwd	 "$(AS_PROJECT_PATH)/Physical/$(AS_CONFIGURATION)/Hardware.hc" -v V1.00.0 -S PLC1 -o "$(AS_CPU_PATH)/ashwd.br" -T SG4 -B V4.00 -P "$(AS_PROJECT_PATH)" -zip -s PLC1 -hwd --$$$newFormat$$$
+arconfig	"$(AS_ACTIVE_CONFIG_PATH)/IoMap.iom"  -c Simulation -arconfig -v V1.00.0 -S PLC1 -o "$(AS_CPU_PATH)/arconfig.br" "$(AS_CPU_PATH)/ChannelConfiguration.xml" -T SG4  -B V4.00 -P "$(AS_PROJECT_PATH)" -s PLC1 --$$$newFormat$$$
+iomap	 -m "$(AS_CPU_PATH)/ConfigInfo.cfi" -g "$(AS_TEMP_PATH)/Objects/Declarations.lst" -x "$(AS_CPU_PATH)/ChannelConfiguration.xml" -v V1.00.0 -f "$(AS_CPU_PATH)/Global.ofs" -o "$(AS_CPU_PATH)/iomap.br" -T SG4  -B V4.00 -P "$(AS_PROJECT_PATH)" -s PLC1 --$$$newFormat$$$
+sysconf	"$(AS_PROJECT_PATH)/Physical/Simulation/Hardware.hc" "$(AS_ACTIVE_CONFIG_PATH)/sysconf.br" "$(AS_ACTIVE_CONFIG_PATH)/ArConfig.rtc"  -sysconf -S PLC1 -o "$(AS_CPU_PATH)/sysconf.br" -T SG4  -B V4.00 -P "$(AS_PROJECT_PATH)" -s PLC1 --$$$newFormat$$$
+AsFw	 "$(AS_PROJECT_PATH)/Physical/$(AS_CONFIGURATION)/Hardware.hc" -v V1.00.0 -S PLC1 -o "$(AS_CPU_PATH)/asfw.br" -T SG4 -B V4.00 -P "$(AS_PROJECT_PATH)" -zip -s PLC1 -firmware --$$$newFormat$$$

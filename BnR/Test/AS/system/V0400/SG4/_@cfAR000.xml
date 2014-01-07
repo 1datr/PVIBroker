@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+<tree  xmlns:dt="urn:schemas-microsoft-com:datatypes">
+
+
+<n ID="DEVICES">
+<n ID="REMMEM">
+<d ID="DDriverName" dt:dt="string">DdNtNvFile</d>
+<d ID="DDriverType" dt:dt="ui4">6</d>
+<d ID="StartMode" dt:dt="ui4">1</d>
+<d ID="DeviceParam" dt:dt="string"> /DEVICE=RPSHD /PATH=REMMEM</d>
+<d ID="DeviceDependence" dt:dt="string">RPSHD</d>
+</n>
+<n ID="USERRAM">
+<d ID="DDriverName" dt:dt="string">DdNtNvFile</d>
+<d ID="DDriverType" dt:dt="ui4">6</d>
+<d ID="StartMode" dt:dt="ui4">1</d>
+<d ID="DeviceParam" dt:dt="string"> /DEVICE=RPSHD /PATH=USERRAM</d>
+<d ID="DeviceDependence" dt:dt="string">RPSHD</d>
+</n>
+<n ID="SWIOTIMER">
+<d ID="DDriverName" dt:dt="string">DdxxSWIOT</d>
+<d ID="DDriverType" dt:dt="ui4">11</d>
+<d ID="StartMode" dt:dt="ui4">1</d>
+</n>
+</n>
+<n ID="INADEVICES">
+<n ID="IF3">
+<d ID="FbDriverName" dt:dt="string">FbEthUdp</d>
+<d ID="Device" dt:dt="string">IF3</d>
+<d ID="StartMode" dt:dt="ui4">1</d>
+<d ID="InaNode" dt:dt="ui4">2</d>
+</n>
+</n>
+<n ID="INA2000">
+<d ID="Connections" dt:dt="ui4">4</d>
+<d ID="FastCommunication" dt:dt="ui4">1</d>
+</n>
+<n ID="BOOTPROPERTIES">
+<d ID="AfterReset" dt:dt="ui4">1</d>
+<d ID="AfterPowerFail" dt:dt="ui4">1</d>
+</n>
+<n ID="GLOBALPV">
+<d ID="VolatileSize" dt:dt="ui4">65535</d>
+<d ID="RemanentSize" dt:dt="ui4">4096</d>
+<d ID="PermanentSize" dt:dt="ui4">0</d>
+</n>
+<n ID="SYSTEMTABLES">
+<d ID="CyclicTasks" dt:dt="ui4">150</d>
+<d ID="BRModules" dt:dt="ui4">200</d>
+</n>
+<n ID="CYCLICSYSTEM">
+<d ID="SystemTick" dt:dt="ui4">10000</d>
+<d ID="TimerDevice" dt:dt="string">SWIOTIMER</d>
+
+<n ID="IDLETIME">
+<d ID="CycleTime" dt:dt="ui4">100000</d>
+<d ID="IdleTime" dt:dt="ui4">0</d>
+</n>
+<n ID="TASKCLASSES">
+
+<n ID="TC#1">
+<d ID="CycleTime" dt:dt="ui4">100000</d>
+<d ID="Tolerance" dt:dt="ui4">10000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">204</d>
+</n>
+
+<n ID="TC#2">
+<d ID="CycleTime" dt:dt="ui4">200000</d>
+<d ID="Tolerance" dt:dt="ui4">10000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#3">
+<d ID="CycleTime" dt:dt="ui4">500000</d>
+<d ID="Tolerance" dt:dt="ui4">10000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#4">
+<d ID="CycleTime" dt:dt="ui4">1000000</d>
+<d ID="Tolerance" dt:dt="ui4">10000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#5">
+<d ID="CycleTime" dt:dt="ui4">2000000</d>
+<d ID="Tolerance" dt:dt="ui4">10000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#6">
+<d ID="CycleTime" dt:dt="ui4">3000000</d>
+<d ID="Tolerance" dt:dt="ui4">12000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#7">
+<d ID="CycleTime" dt:dt="ui4">4000000</d>
+<d ID="Tolerance" dt:dt="ui4">12000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+<n ID="TC#8">
+<d ID="CycleTime" dt:dt="ui4">5000000</d>
+<d ID="Tolerance" dt:dt="ui4">30000000</d>
+<d ID="Stack" dt:dt="ui4">8196</d>
+<d ID="Priority" dt:dt="ui4">182</d>
+</n>
+
+</n>
+
+</n>
+</tree>

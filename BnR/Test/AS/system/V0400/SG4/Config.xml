@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <AutomationStudio>
+    <Dependency FromVersion="3.0.90.0" ToVersion=""/>
+  </AutomationStudio>
+</Configuration>

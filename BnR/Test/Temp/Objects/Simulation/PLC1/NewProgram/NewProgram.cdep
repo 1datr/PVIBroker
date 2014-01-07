@@ -1,0 +1,13 @@
+$(AS_CPU_PATH)/NewProgram/NewProgram.o:
+$(AS_PROJECT_PATH)/Logical/NewProgram/NewProgram.c
+$(AS_GNU_INST_PATH)/i386-elf/include/bur/plctypes.h
+$(AS_GNU_INST_PATH)/i386-elf/include/bur/plc.h
+$(AS_TEMP_PATH)/Includes/NewProgram/AsDefault.h
+$(AS_TEMP_PATH)/Includes/AsDefault.h
+$(AS_TEMP_PATH)/Includes/Runtime.h
+$(AS_TEMP_PATH)/Includes/Operator.h
+$(AS_TEMP_PATH)/Includes/astime.h
+$(AS_TEMP_PATH)/Includes/runtime.h
+$(AS_TEMP_PATH)/Includes/AsIecCon.h
+$(AS_TEMP_PATH)/Includes/globalTYP.h
+$(AS_TEMP_PATH)/Includes/globalVAR.h

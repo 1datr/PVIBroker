@@ -1,0 +1,1 @@
+NewProgram	 -T SG4  -B V4.00 -G V4.1.2  -s NewProgram -t "$(AS_TEMP_PATH)" -I "$(AS_PROJECT_PATH)/Logical/NewProgram" "$(AS_TEMP_PATH)/Includes/NewProgram" "$(AS_TEMP_PATH)/Includes" -trigraphs -fno-asm -D _DEFAULT_INCLUDES -D _SG4 -fPIC -O0 -g -nostartfiles -Wall -include "$(AS_CPU_PATH)/Libraries.h" --$$$newFormat$$$
