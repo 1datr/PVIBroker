@@ -40,6 +40,15 @@ namespace PVIBroker
             return true;
         }
 
+        public bool endservice(string srvname)
+        {
+            PVIBCommand pvibc = new LibPVITree.PVIBCommand();
+            pvibc.cmdtype = "endservice";
+            pvibc.servname = srvname;
+            Form1.QConnQueries.Add(srvname+"#end", pvibc);
+            return true;
+        }
+
         public bool mkserv_com(string srvname, string ip, int port)
         {
             // инициализировать очередь команд

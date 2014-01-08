@@ -186,10 +186,14 @@ namespace PVIBroker
 
         private void button2_Click(object sender, EventArgs e)
         {
-            CPUWatcher w = (CPUWatcher)components.Components[3];
-            w.AddVar(tbVarname.Text);
+           
         }
 
+        public bool EndService(String servname)
+        {
+            return true;
+        }
+        // Таймер. По таймеру обрабатываются основные команды
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (QConnQueries == null) QConnQueries = new Dictionary<string, PVIBCommand>();
@@ -199,6 +203,7 @@ namespace PVIBroker
                 lastkey = k;
             }
             PVIBCommand cmd = QConnQueries[lastkey];
+            CPUWatcher w = null;
             switch (cmd.cmdtype)
             {
                 case "addservice":
@@ -206,12 +211,22 @@ namespace PVIBroker
                     QConnQueries.Remove(lastkey);
                     break;
                 case "addvar":
-                    CPUWatcher w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
+                    w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
                     if (w.isConnected)
                     {
                         w.AddVar(cmd.varname);
                         QConnQueries.Remove(lastkey);
                     }
+                    break;
+                case "endservice":
+                    if (!watchers.ContainsKey(cmd.servname)) break;
+                    int watcher_idx = watchers[cmd.servname];
+                    w = (CPUWatcher)this.components.Components[watcher_idx];               
+                    //w.Dispose();
+                    this.components.Remove(w);
+                    watchers.Remove(cmd.servname);
+                    QConnQueries.Remove(lastkey);
+                    // надо чтобы менялись номера в watches
                     break;
             }
 

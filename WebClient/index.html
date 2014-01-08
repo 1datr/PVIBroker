@@ -64,6 +64,23 @@
                     });
                 }
 
+    function CloseService(){
+
+                    var theurl = 'http://localhost:8080/PVIBService/endservice/?srvname=srv1';
+
+                    $.ajax({
+                            url: theurl,
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                   alert(xhr.status);
+                                   alert(thrownError);
+                            },
+                            success: function (data) {
+                                  $("#div_changedvars").html(data);
+                            },
+                            dataType: 'jsonp'
+                    });
+                }
+
         $(document).ready(function () {
             theurl = 'http://localhost:8080/PVIBService/mkserv_tcpip/?srvname=srv1&ip=127.0.0.1&port=11160';
             //alert(theurl);
@@ -118,6 +135,7 @@
           <input type="button" onclick="Varlist()" value="VARLIST" />
 
           <input type="button" onclick="VarChanged()" value="VARCHANGED" />
+          <input type="button" onclick="CloseService()" value="CLOSE" />
           <div id="div_changedvars"></div>
     </form>
 </body>

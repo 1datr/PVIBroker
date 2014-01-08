@@ -41,13 +41,10 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPVIBrokerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.button1 = new System.Windows.Forms.Button();
             this.propGrid1 = new PVIBroker.PropGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.tbVarname = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -139,16 +136,6 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(73, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Make connection";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // propGrid1
             // 
             this.propGrid1.AllowUserToAddRows = false;
@@ -159,10 +146,10 @@
             this.propGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.propGrid1.Location = new System.Drawing.Point(12, 56);
+            this.propGrid1.Location = new System.Drawing.Point(12, 50);
             this.propGrid1.Name = "propGrid1";
             this.propGrid1.ReadOnly = true;
-            this.propGrid1.Size = new System.Drawing.Size(384, 201);
+            this.propGrid1.Size = new System.Drawing.Size(384, 207);
             this.propGrid1.TabIndex = 0;
             // 
             // Column1
@@ -191,23 +178,6 @@
         "gOPC.Input.dst_cell"};
             this.cpuWatcher1.OnChangeVar += new Broker.OnVarChange(this.cpuWatcher1_OnChangeVar);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(321, 24);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Add variable";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // tbVarname
-            // 
-            this.tbVarname.Location = new System.Drawing.Point(182, 27);
-            this.tbVarname.Name = "tbVarname";
-            this.tbVarname.Size = new System.Drawing.Size(133, 20);
-            this.tbVarname.TabIndex = 5;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -218,9 +188,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 294);
-            this.Controls.Add(this.tbVarname);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.propGrid1);
@@ -259,9 +226,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox tbVarname;
         private System.Windows.Forms.Timer timer1;
     }
 }
