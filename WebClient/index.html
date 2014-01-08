@@ -76,7 +76,10 @@
                                    dataType: 'jsonp'
                                    });
 
-
+                           $.ajax({
+                                   url: 'http://localhost:8080/PVIBService/watch_var/?srvname=srv1&varname=gOPC.Output.Ypos',
+                                   dataType: 'jsonp'
+                                   });
 
                         },
                     dataType: 'jsonp'

@@ -54,13 +54,15 @@ namespace Broker
         void service_Connected(object sender, PviEventArgs e)
         {
            // Console.WriteLine("Service Connected Error=" + e.ErrorCode.ToString());
-            cpu = new Cpu(service, "Cpu");
+            if(cpu==null)
+                cpu = new Cpu(service, "Cpu");
             //cpu.Connection.DeviceType = DeviceType.Serial;
             cpu.Connection.DeviceType = DeviceType.TcpIp;
             cpu.Connection.TcpIp.DestinationIpAddress = "127.0.0.1";
             cpu.Connection.TcpIp.DestinationPort = 11160;
             //cpu.Connection.Serial.Channel = 1;
             cpu.Connected += new PviEventHandler(cpu_Connected);
+            cpu.Error += new PviEventHandler(cpu_Error);
             //Console.WriteLine("Connecting Cpu ...");
             cpu.Connect();
         }
@@ -85,6 +87,12 @@ namespace Broker
             VarDict.Add(varname,variable);
             variable.Connect();
             }
+        }
+
+        void cpu_Error(object sender, PviEventArgs e)
+        {
+            f_connected = false;
+            
         }
 
         private bool f_connected = false;

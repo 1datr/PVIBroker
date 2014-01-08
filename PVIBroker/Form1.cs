@@ -207,8 +207,11 @@ namespace PVIBroker
                     break;
                 case "addvar":
                     CPUWatcher w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
-                    if(w.isConnected)
+                    if (w.isConnected)
+                    {
                         w.AddVar(cmd.varname);
+                        QConnQueries.Remove(lastkey);
+                    }
                     break;
             }
 
