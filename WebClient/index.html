@@ -65,7 +65,22 @@
                 }
 
         $(document).ready(function () {
+            theurl = 'http://localhost:8080/PVIBService/mkserv_tcpip/?srvname=srv1&ip=127.0.0.1&port=11160';
+            //alert(theurl);
+            $.ajax({
+                    url: theurl,
+                    success: function (data)
+                        {
+                           $.ajax({
+                                   url: 'http://localhost:8080/PVIBService/watch_var/?srvname=srv1&varname=gOPC.Output.Xpos',
+                                   dataType: 'jsonp'
+                                   });
 
+
+
+                        },
+                    dataType: 'jsonp'
+                    });
 
             Pos();
             $("#setdestx").click(

@@ -34,17 +34,21 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.входToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
+            this.aboutPVIBrokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPVIBrokerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.aboutPVIBrokerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.propGrid1 = new PVIBroker.PropGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutPVIBrokerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.tbVarname = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propGrid1)).BeginInit();
@@ -78,19 +82,12 @@
             this.входToolStripMenuItem.Text = "&Exit";
             this.входToolStripMenuItem.Click += new System.EventHandler(this.входToolStripMenuItem_Click);
             // 
-            // cpuWatcher1
+            // aboutPVIBrokerToolStripMenuItem
             // 
-            this.cpuWatcher1.IP = "127.0.0.1";
-            this.cpuWatcher1.Port = 11160;
-            this.cpuWatcher1.Srvname = "srv1";
-            this.cpuWatcher1.VarNames = new string[] {
-        "gOPC.Output.Xpos",
-        "gOPC.Output.Ypos",
-        "gOPC.Output.Zpos",
-        "gOPC.Output.load",
-        "gOPC.Input.src_cell",
-        "gOPC.Input.dst_cell"};
-            this.cpuWatcher1.OnChangeVar += new Broker.OnVarChange(this.cpuWatcher1_OnChangeVar);
+            this.aboutPVIBrokerToolStripMenuItem.Name = "aboutPVIBrokerToolStripMenuItem";
+            this.aboutPVIBrokerToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.aboutPVIBrokerToolStripMenuItem.Text = "About PVI Broker";
+            this.aboutPVIBrokerToolStripMenuItem.Click += new System.EventHandler(this.aboutPVIBrokerToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -99,7 +96,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(358, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(408, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -119,49 +116,6 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 240);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(358, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // aboutPVIBrokerToolStripMenuItem
-            // 
-            this.aboutPVIBrokerToolStripMenuItem.Name = "aboutPVIBrokerToolStripMenuItem";
-            this.aboutPVIBrokerToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.aboutPVIBrokerToolStripMenuItem.Text = "About PVI Broker";
-            this.aboutPVIBrokerToolStripMenuItem.Click += new System.EventHandler(this.aboutPVIBrokerToolStripMenuItem_Click);
-            // 
-            // propGrid1
-            // 
-            this.propGrid1.AllowUserToAddRows = false;
-            this.propGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.propGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.propGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.propGrid1.Location = new System.Drawing.Point(12, 34);
-            this.propGrid1.Name = "propGrid1";
-            this.propGrid1.ReadOnly = true;
-            this.propGrid1.Size = new System.Drawing.Size(334, 191);
-            this.propGrid1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Переменная";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Значение";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -177,11 +131,96 @@
             this.aboutPVIBrokerToolStripMenuItem1.Text = "About PVI Broker";
             this.aboutPVIBrokerToolStripMenuItem1.Click += new System.EventHandler(this.aboutPVIBrokerToolStripMenuItem1_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 272);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(408, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(73, 27);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Make connection";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // propGrid1
+            // 
+            this.propGrid1.AllowUserToAddRows = false;
+            this.propGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.propGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.propGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.propGrid1.Location = new System.Drawing.Point(12, 56);
+            this.propGrid1.Name = "propGrid1";
+            this.propGrid1.ReadOnly = true;
+            this.propGrid1.Size = new System.Drawing.Size(384, 201);
+            this.propGrid1.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Переменная";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Значение";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // cpuWatcher1
+            // 
+            this.cpuWatcher1.IP = "127.0.0.1";
+            this.cpuWatcher1.Port = 11160;
+            this.cpuWatcher1.Srvname = "srv1";
+            this.cpuWatcher1.VarNames = new string[] {
+        "gOPC.Output.Xpos",
+        "gOPC.Output.Ypos",
+        "gOPC.Output.Zpos",
+        "gOPC.Output.load",
+        "gOPC.Input.src_cell",
+        "gOPC.Input.dst_cell"};
+            this.cpuWatcher1.OnChangeVar += new Broker.OnVarChange(this.cpuWatcher1_OnChangeVar);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(321, 24);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Add variable";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tbVarname
+            // 
+            this.tbVarname.Location = new System.Drawing.Point(182, 27);
+            this.tbVarname.Name = "tbVarname";
+            this.tbVarname.Size = new System.Drawing.Size(133, 20);
+            this.tbVarname.TabIndex = 5;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 262);
+            this.ClientSize = new System.Drawing.Size(408, 294);
+            this.Controls.Add(this.tbVarname);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.propGrid1);
@@ -220,6 +259,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPVIBrokerToolStripMenuItem1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox tbVarname;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

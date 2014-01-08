@@ -51,6 +51,7 @@
       <DependentUpon>CPUWatcher.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PVIBCommand.cs" />
     <Compile Include="PVITree_CPU.cs" />
     <Compile Include="PVITree_Root.cs" />
     <Compile Include="PVITree_Service.cs" />

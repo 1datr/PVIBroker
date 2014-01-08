@@ -1,21 +1,48 @@
 
 
-Tue Jan 07 15:27:50 2014
+Wed Jan 08 12:09:40 2014
 No ARsim registration found!
   Bernecker & Rainer 
 
 
 
-Tue Jan 07 15:27:50 2014
+Wed Jan 08 12:09:40 2014
 COMMAND_COLDSTART
-InstanceName : 01cf0b9b7fcfb970
+InstanceName : 01cf0c48fb0b15a0
 
 WorkingPath :
-C:\projects\test\Temp\Simulation\Simulation\PLC1\
+C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Temp\Simulation\Simulation\PLC1\
 
 
 
-Tue Jan 07 15:27:51 2014
+Wed Jan 08 12:09:40 2014
 COMMAND_COLDSTART
 Version : V4.00
 
+
+
+Wed Jan 08 14:22:16 2014
+COMMAND_TERMINATE
+
+
+Wed Jan 08 14:22:18 2014
+
+
+Wed Jan 08 14:51:32 2014
+COMMAND_COLDSTART
+Version : V4.00
+
+
+
+Wed Jan 08 15:16:03 2014
+COMMAND_TERMINATE
+
+
+Wed Jan 08 15:16:04 2014
+
+
+Wed Jan 08 15:16:04 2014
+COMMAND_TERMINATE
+
+
+Wed Jan 08 15:16:04 2014

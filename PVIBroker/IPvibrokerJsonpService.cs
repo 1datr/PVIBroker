@@ -30,20 +30,17 @@ namespace PVIBroker
     [ServiceContract]
     public interface IPVIBJsonpService
     {
-        [OperationContract]
-        [WebGet(UriTemplate = "mkservice/?srvname={srvname}",
-            ResponseFormat = WebMessageFormat.Json)]
-        int mkservice(string srvname);
+        
 
         [OperationContract]
-        [WebGet(UriTemplate = "connect_cpu_tcpip/?srvname={srvname}&ip={ip}&port={port}&cpuname={cpuname}",
+        [WebGet(UriTemplate = "mkserv_tcpip/?srvname={srvname}&ip={ip}&port={port}",
             ResponseFormat = WebMessageFormat.Json)]
-        int connect_cpu_tcpip(string srvname,string ip, int port, string cpuname);
+        bool mkserv_tcpip(string srvname, string ip, int port);
 
         [OperationContract]
-        [WebGet(UriTemplate = "watch_var/?srvname={srvname}&cpuname={cpuname}&varname={varname}",
+        [WebGet(UriTemplate = "watch_var/?srvname={srvname}&varname={varname}",
             ResponseFormat = WebMessageFormat.Json)]
-        int watch_var(string srvname, string cpuname, string varname);
+        int watch_var(string srvname, string varname);
 
         [OperationContract]
         [WebGet(UriTemplate = "get_var/?srvname={srvname}&varname={varname}",

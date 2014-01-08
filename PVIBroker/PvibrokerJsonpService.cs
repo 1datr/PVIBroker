@@ -17,6 +17,7 @@ using BR.AN;
 using LibPVITree;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using LibPVITree;
 
 namespace PVIBroker
 {
@@ -24,24 +25,43 @@ namespace PVIBroker
     {
         private bool wait_connect = false;
         
-        public int mkservice(string srvname)
+        public bool mkserv_tcpip(string srvname, string ip, int port)
         {
-            Form1.Root.addService(srvname);
-            return 0;
+            // инициализировать очередь команд
+            if (Form1.QConnQueries == null)
+                Form1.QConnQueries = new Dictionary<string, LibPVITree.PVIBCommand>();
+            if (Form1.QConnQueries.ContainsKey(srvname)) return false;
+            PVIBCommand pvibc = new LibPVITree.PVIBCommand();
+            pvibc.TcpIpSettings = new TcpIp();
+            pvibc.TcpIpSettings.DestinationIpAddress = ip;
+            pvibc.TcpIpSettings.DestinationPort = short.Parse(port.ToString());
+            pvibc.servname = srvname;            
+            Form1.QConnQueries.Add(srvname, pvibc);
+            return true;
         }
 
-        public int connect_cpu_tcpip(string srvname, string ip, int port, string cpuname)
+        public bool mkserv_com(string srvname, string ip, int port)
         {
-            /*Cpu cpu = new Cpu(Form1.ServList[srvname],cpuname);
-            cpu.Connection.DeviceType = DeviceType.TcpIp;
-            cpu.Connection.TcpIp.DestinationIpAddress = ip;
-            cpu.Connection.TcpIp.DestinationPort = short.Parse(port.ToString());
-            cpu.Connect();*/
-            return 0;
+            // инициализировать очередь команд
+            if (Form1.QConnQueries == null)
+                Form1.QConnQueries = new Dictionary<string, LibPVITree.PVIBCommand>();
+            if (Form1.QConnQueries.ContainsKey(srvname)) return false;
+            PVIBCommand pvibc = new LibPVITree.PVIBCommand();
+            
+            pvibc.TcpIpSettings.DestinationIpAddress = ip;
+            pvibc.TcpIpSettings.DestinationPort = short.Parse(port.ToString());
+            pvibc.servname = srvname;
+            Form1.QConnQueries.Add(srvname, pvibc);
+            return true;
         }
 
-        public int watch_var(string srvname, string cpuname, string varname)
+        public int watch_var(string srvname, string varname)
         {
+            PVIBCommand pvibc = new LibPVITree.PVIBCommand();
+            pvibc.cmdtype = "addvar";
+            pvibc.varname = varname;
+            pvibc.servname = srvname;
+            Form1.QConnQueries.Add(srvname+"."+varname, pvibc);
             return 0;
         }
 

@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Broker
 {
-    public delegate void OnVarChange(Variable var);
+    public delegate void OnVarChange(Variable var, string servname);
 
     partial class CPUWatcher
     {
@@ -45,7 +45,7 @@ namespace Broker
         void ValueChanged(object sender, VariableEventArgs e)
         {
             if(OnChangeVar_hndlr!=null)
-                OnChangeVar_hndlr((Variable)sender);
+                OnChangeVar_hndlr((Variable)sender,this.Srvname);
           /*  Variable var = (Variable)sender;
             Console.WriteLine("Value={0}", var.Value.ToString());
             Application.Exit();*/
@@ -72,7 +72,9 @@ namespace Broker
         public Dictionary<string, Variable> VarDict;
         void cpu_Connected(object sender, PviEventArgs e)
         {
+            f_connected = true;
             VarDict = new Dictionary<string,Variable>();
+            if(VarNames!=null)
             foreach(string varname in VarNames)
             {
             Variable variable = new Variable(cpu, varname);
@@ -83,6 +85,28 @@ namespace Broker
             VarDict.Add(varname,variable);
             variable.Connect();
             }
+        }
+
+        private bool f_connected = false;
+        // есть коннект с ПЛК
+        public bool isConnected 
+        {
+            get {
+                return f_connected;
+            }
+        }
+
+        public int AddVar(string varname)
+        {
+            Variable variable = new Variable(cpu, varname);
+            variable.Active = true;
+            variable.ValueChanged += new VariableEventHandler(ValueChanged);
+            //   variable.Connected += new PviEventHandler(variable_Connected);
+            // Console.WriteLine("Connecting Variable ...");
+            if (VarDict.ContainsKey(varname)) return 1;
+            VarDict.Add(varname, variable);
+            variable.Connect();
+            return 0;
         }
 
         private Cpu cpu;
