@@ -5,6 +5,8 @@ using System.ComponentModel;
 namespace Broker
 {
     public delegate void OnVarChange(Variable var, string servname);
+    public delegate void OnCPUConnect(CPUWatcher w, string servname);
+    public delegate void OnCPUConnectError(CPUWatcher w, string servname, int Errcode);
 
     partial class CPUWatcher
     {
@@ -74,6 +76,8 @@ namespace Broker
         public Dictionary<string, Variable> VarDict;
         void cpu_Connected(object sender, PviEventArgs e)
         {
+            if (this.OnCPUConnect_hndlr != null)
+                this.OnCPUConnect_hndlr(this, this.Srvname);
             f_connected = true;
             VarDict = new Dictionary<string,Variable>();
             if(VarNames!=null)
@@ -85,14 +89,15 @@ namespace Broker
          //   variable.Connected += new PviEventHandler(variable_Connected);
            // Console.WriteLine("Connecting Variable ...");
             VarDict.Add(varname,variable);
-            variable.Connect();
+            variable.Connect();            
             }
         }
 
         void cpu_Error(object sender, PviEventArgs e)
         {
             f_connected = false;
-            
+            if (this.OnCPUConnectError_hndlr!=null)
+                this.OnCPUConnectError_hndlr(this, this.Srvname, e.ErrorCode);
         }
 
         private bool f_connected = false;
@@ -163,6 +168,24 @@ namespace Broker
         {
             add { lock (this) { OnChangeVar_hndlr += value; } }
             remove { lock (this) { OnChangeVar_hndlr -= value; } }
+        }
+
+        private OnCPUConnect OnCPUConnect_hndlr;
+        [DisplayName("При коннекте к CPU")]
+        [Description("Если окончательно сконнектилось с ЦПУ")]
+        public event OnCPUConnect OnCPUConnect
+        {
+            add { lock (this) { OnCPUConnect_hndlr += value; } }
+            remove { lock (this) { OnCPUConnect_hndlr -= value; } }
+        }
+
+        private OnCPUConnectError OnCPUConnectError_hndlr;
+        [DisplayName("При ошибке коннекта с CPU")]
+        [Description("Если произошла ошибка при коннекте с ЦПУ")]
+        public event OnCPUConnectError OnCPUConnectError
+        {
+            add { lock (this) { OnCPUConnectError_hndlr += value; } }
+            remove { lock (this) { OnCPUConnectError_hndlr -= value; } }
         }
 
         #endregion

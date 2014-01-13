@@ -38,6 +38,11 @@ namespace PVIBroker
         bool mkserv_tcpip(string srvname, string ip, int port);
 
         [OperationContract]
+        [WebGet(UriTemplate = "srv_status/?srvname={srvname}",
+            ResponseFormat = WebMessageFormat.Json)]
+        int srv_status(string srvname);
+
+        [OperationContract]
         [WebGet(UriTemplate = "endservice/?srvname={srvname}",
             ResponseFormat = WebMessageFormat.Json)]
         bool endservice(string srvname);

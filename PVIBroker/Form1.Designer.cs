@@ -41,11 +41,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPVIBrokerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.propGrid1 = new PVIBroker.PropGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpuWatcher1 = new Broker.CPUWatcher(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propGrid1)).BeginInit();
@@ -136,6 +136,11 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // propGrid1
             // 
             this.propGrid1.AllowUserToAddRows = false;
@@ -177,11 +182,8 @@
         "gOPC.Input.src_cell",
         "gOPC.Input.dst_cell"};
             this.cpuWatcher1.OnChangeVar += new Broker.OnVarChange(this.cpuWatcher1_OnChangeVar);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.cpuWatcher1.OnCPUConnect += new Broker.OnCPUConnect(this.cpuWatcher1_OnCPUConnect);
+            this.cpuWatcher1.OnCPUConnectError += new Broker.OnCPUConnectError(this.cpuWatcher1_OnCPUConnectError);
             // 
             // Form1
             // 

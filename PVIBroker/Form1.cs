@@ -108,6 +108,8 @@ namespace PVIBroker
             w.Port = port;
             w.Srvname = srvname;
             w.OnChangeVar += new OnVarChange(cpuWatcher1_OnChangeVar);
+            w.OnCPUConnect += new OnCPUConnect(this.cpuWatcher1_OnCPUConnect);
+            w.OnCPUConnectError += new OnCPUConnectError(this.cpuWatcher1_OnCPUConnectError);
             components.Add(w);
             w.Activate();
             watchers.Add(srvname, components.Components.Count - 1);
@@ -231,6 +233,26 @@ namespace PVIBroker
             }
 
             
+        }
+        public static Dictionary<string, int> ConnStatus;
+        private void cpuWatcher1_OnCPUConnect(CPUWatcher w, string servname)
+        {
+            if (ConnStatus == null)
+                ConnStatus = new Dictionary<string, int>();
+            if (ConnStatus.ContainsKey(servname))
+                ConnStatus[servname] = 0;
+            else
+                ConnStatus.Add(servname, 0);
+        }
+
+        private void cpuWatcher1_OnCPUConnectError(CPUWatcher w, string servname, int Errcode)
+        {
+            if (ConnStatus == null)
+                ConnStatus = new Dictionary<string, int>();
+            if (ConnStatus.ContainsKey(servname))
+                ConnStatus[servname] = Errcode;
+            else
+                ConnStatus.Add(servname, Errcode);
         }
         
         

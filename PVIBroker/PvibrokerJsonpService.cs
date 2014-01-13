@@ -40,6 +40,13 @@ namespace PVIBroker
             return true;
         }
 
+        public int srv_status(string srvname) 
+        {
+            if (Form1.ConnStatus == null) return -1;
+            if (!Form1.ConnStatus.ContainsKey(srvname)) return -1;
+            return Form1.ConnStatus[srvname];
+        }
+
         public bool endservice(string srvname)
         {
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
