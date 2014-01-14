@@ -69,7 +69,7 @@ namespace PVIBroker
         private void cpuWatcher1_OnChangeVar(Variable var,string servname)
         {
             first_start = false;
-            propGrid1.PrintProperty(var.Name, var.Value);
+            propGrid1.PrintProperty(var.Name, var.Value.ToString());
             if (Varlist == null)
             {
                 Varlist = new Dictionary<string, Variable>();

@@ -60,8 +60,8 @@ namespace Broker
                 cpu = new Cpu(service, "Cpu");
             //cpu.Connection.DeviceType = DeviceType.Serial;
             cpu.Connection.DeviceType = DeviceType.TcpIp;
-            cpu.Connection.TcpIp.DestinationIpAddress = "127.0.0.1";
-            cpu.Connection.TcpIp.DestinationPort = 11160;
+            cpu.Connection.TcpIp.DestinationIpAddress = this.IP;
+            cpu.Connection.TcpIp.DestinationPort = short.Parse(this.Port.ToString());
             //cpu.Connection.Serial.Channel = 1;
             cpu.Connected += new PviEventHandler(cpu_Connected);
             cpu.Error += new PviEventHandler(cpu_Error);

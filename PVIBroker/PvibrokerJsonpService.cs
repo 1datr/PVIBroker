@@ -77,7 +77,8 @@ namespace PVIBroker
             pvibc.cmdtype = "addvar";
             pvibc.varname = varname;
             pvibc.servname = srvname;
-            Form1.QConnQueries.Add(srvname+"."+varname, pvibc);
+            if(!Form1.QConnQueries.ContainsKey(srvname+"."+varname))
+                Form1.QConnQueries.Add(srvname+"."+varname, pvibc);
             return 0;
         }
 
