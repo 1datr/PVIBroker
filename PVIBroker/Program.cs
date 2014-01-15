@@ -13,9 +13,13 @@ namespace PVIBroker
         [STAThread]
         static void Main()
         {
+            if (System.Diagnostics.Process.GetProcessesByName(Application.ProductName).Length > 1)
+                return;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
+        
     }
 }
