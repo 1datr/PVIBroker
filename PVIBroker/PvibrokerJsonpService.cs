@@ -18,15 +18,31 @@ using LibPVITree;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using LibPVITree;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace PVIBroker
 {
     public class PVIBJsonpService : IPVIBJsonpService
     {
         private bool wait_connect = false;
-        
+        // информация об IP клиента
+        private ClientInfo GetClientInfo()
+        {
+            OperationContext context = OperationContext.Current;
+            MessageProperties messageProperties = context.IncomingMessageProperties;
+            RemoteEndpointMessageProperty endpointProperty = messageProperties[RemoteEndpointMessageProperty.Name]
+                as RemoteEndpointMessageProperty;
+
+            ClientInfo ci = new LibPVITree.ClientInfo();
+            ci.ip = endpointProperty.Address;
+            ci.port = endpointProperty.Port;
+            return ci;
+        }
+
         public bool mkserv_tcpip(string srvname, string ip, int port)
         {
+            
             // инициализировать очередь команд
             if (Form1.QConnQueries == null)
                 Form1.QConnQueries = new Dictionary<string, LibPVITree.PVIBCommand>();
@@ -35,7 +51,8 @@ namespace PVIBroker
             pvibc.TcpIpSettings = new TcpIp();
             pvibc.TcpIpSettings.DestinationIpAddress = ip;
             pvibc.TcpIpSettings.DestinationPort = short.Parse(port.ToString());
-            pvibc.servname = srvname;            
+            pvibc.servname = srvname;
+            pvibc.clientinfo = GetClientInfo();
             Form1.QConnQueries.Add(srvname, pvibc);
             return true;
         }
