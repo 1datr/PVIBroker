@@ -1,4 +1,4 @@
-PVIBroker - Web JSON-gateway for PVI Protocol(B&R PLC communiction protocol)
+PVIBroker - Web JSON-gateway for PVI Protocol(B&R PLC communiction protocol like OPC)
 =======
 
 # LICENSE

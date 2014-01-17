@@ -10,6 +10,7 @@ namespace LibPVITree
     {
         public string ip { get; set; }
         public int port { get; set; }
+        public bool _protected { get; set; }
     }
 
     public class PVIBCommand

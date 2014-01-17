@@ -39,8 +39,8 @@ namespace PVIBroker
             ci.port = endpointProperty.Port;
             return ci;
         }
-
-        public bool mkserv_tcpip(string srvname, string ip, int port)
+        // Создать сервак с коннектом по TCP
+        public bool mkserv_tcpip(string srvname, string ip, int port, bool pmode = true, string subspage = "")
         {
             
             // инициализировать очередь команд
@@ -53,12 +53,28 @@ namespace PVIBroker
             pvibc.TcpIpSettings.DestinationPort = short.Parse(port.ToString());
             pvibc.servname = srvname;
             pvibc.clientinfo = GetClientInfo();
+            pvibc.clientinfo._protected = pmode;
             Form1.QConnQueries.Add(srvname, pvibc);
+            return true;
+        }
+        // Создать сервак с коннектом по COM
+        public bool mkserv_com(string srvname, string comparams, bool pmode = true, string subspage = "")
+        {
             return true;
         }
 
         public int srv_status(string srvname) 
         {
+            // Защита
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters == null) return -1;
+            if (!Form1.Hosters.ContainsKey(srvname)) return -1;
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return -1;
+            }
+            // Конец защиты
             if (Form1.ConnStatus == null) return -1;
             if (!Form1.ConnStatus.ContainsKey(srvname)) return -1;
             return Form1.ConnStatus[srvname];
@@ -66,6 +82,16 @@ namespace PVIBroker
 
         public bool endservice(string srvname)
         {
+            // Защита
+            if (Form1.Hosters == null) return false;
+            if (!Form1.Hosters.ContainsKey(srvname)) return false;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return false;
+            }
+            // Конец защиты
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
             pvibc.cmdtype = "endservice";
             pvibc.servname = srvname;
@@ -90,6 +116,16 @@ namespace PVIBroker
 
         public int watch_var(string srvname, string varname)
         {
+            // Защита
+            if (Form1.Hosters == null) return -1;
+            if (!Form1.Hosters.ContainsKey(srvname)) return -1;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return -1;
+            }
+            // Конец защиты
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
             pvibc.cmdtype = "addvar";
             pvibc.varname = varname;
@@ -101,6 +137,16 @@ namespace PVIBroker
 
         public string get_var(string srvname, string varname) 
         {
+            // Защита
+            if (Form1.Hosters == null) return null;
+            if (!Form1.Hosters.ContainsKey(srvname)) return null;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return null;
+            }
+            // Конец защиты
             if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
                 return Form1.Varlist[srvname + "_" + varname].Value.ToString();
             else
@@ -109,6 +155,16 @@ namespace PVIBroker
 
         public int set_var(string srvname, string varname, string varval) 
         {
+            // Защита
+            if (Form1.Hosters == null) return -1;
+            if (!Form1.Hosters.ContainsKey(srvname)) return -1;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return -1;
+            }
+            // Конец защиты
             if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
             {                
                 //Form1.Varlist[srvname + "_" + varname].Value = varval;
@@ -240,6 +296,16 @@ namespace PVIBroker
         //public Dictionary<String, PVIVariable> var_list(string srvname)
         public String var_list(string srvname)
         {
+            // Защита
+            if (Form1.Hosters == null) return null;
+            if (!Form1.Hosters.ContainsKey(srvname)) return null;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return null;
+            }
+            // Конец защиты
             Dictionary<String, PVIVariable> vars = new Dictionary<string, PVIVariable>();
             foreach (KeyValuePair<string, Variable> kvp in Form1.Varlist)
             {
@@ -260,6 +326,16 @@ namespace PVIBroker
 
         public String varchanged(string srvname)
         {
+            // Защита
+            if (Form1.Hosters == null) return null;
+            if (!Form1.Hosters.ContainsKey(srvname)) return null;
+            ClientInfo ci = GetClientInfo();
+            if (Form1.Hosters[srvname]._protected)
+            {
+                if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
+                    return null;
+            }
+            // Конец защиты
             Dictionary<String, PVIVariable> vars = new Dictionary<string, PVIVariable>();
             foreach (KeyValuePair<string, Variable> kvp in Form1.Varlist)
             {

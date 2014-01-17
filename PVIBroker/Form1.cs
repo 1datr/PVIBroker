@@ -27,7 +27,8 @@ namespace PVIBroker
             serviceHost.Open();
         }
 
-        public static Dictionary<String,PVIBCommand> QConnQueries;
+        public static Dictionary<String,PVIBCommand> QConnQueries;  // Очередь заявок 
+        public static Dictionary<String, ClientInfo> Hosters; // Словарь клиентов-основателей сервисов
         private WebServiceHost serviceHost;
         public static PVITree_Root Root;
 
@@ -211,8 +212,11 @@ namespace PVIBroker
                 case "addservice":
                     addCPUWatcher_TCPIP(cmd.servname, cmd.TcpIpSettings.DestinationIpAddress, cmd.TcpIpSettings.DestinationPort);
                     QConnQueries.Remove(lastkey);
+                    if (Hosters == null) Hosters = new Dictionary<string, ClientInfo>();
+                    Hosters.Add(cmd.servname, cmd.clientinfo);
                     break;
                 case "addvar":
+                    if (!watchers.ContainsKey(cmd.servname)) break;
                     w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
                     if (w.isConnected)
                     {

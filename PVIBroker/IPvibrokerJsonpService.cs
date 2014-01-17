@@ -33,9 +33,15 @@ namespace PVIBroker
         
 
         [OperationContract]
-        [WebGet(UriTemplate = "mkserv_tcpip/?srvname={srvname}&ip={ip}&port={port}",
+        [WebGet(UriTemplate = "mkserv_tcpip/?srvname={srvname}&ip={ip}&port={port}&pmode={pmode}&subspage={subspage}",
             ResponseFormat = WebMessageFormat.Json)]
-        bool mkserv_tcpip(string srvname, string ip, int port);
+        bool mkserv_tcpip(string srvname, string ip, int port, bool pmode=true, string subspage="");
+
+        [OperationContract]
+        [WebGet(UriTemplate = "mkserv_com/?srvname={srvname}&comparams={comparams}&pmode={pmode}&subspage={subspage}",
+            ResponseFormat = WebMessageFormat.Json)]
+        bool mkserv_com(string srvname, string comparams, bool pmode = true, string subspage = "");
+
 
         [OperationContract]
         [WebGet(UriTemplate = "srv_status/?srvname={srvname}",
