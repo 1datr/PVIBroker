@@ -100,7 +100,7 @@ namespace PVIBroker
 
         private Dictionary<String, int> watchers;
         // добавить CPUWatcher
-        private bool addCPUWatcher_TCPIP(string srvname, string ip, int port)
+        private bool addCPUWatcher_TCPIP(PVIBCommand cmd,string srvname, string ip, int port)
         {
             if (watchers == null) watchers = new Dictionary<string, int>();
             if (watchers.ContainsKey(srvname)) return false;
@@ -108,12 +108,15 @@ namespace PVIBroker
             w.IP = ip;
             w.Port = port;
             w.Srvname = srvname;
+            w.SubsPage = cmd.SubsUrl;
             w.OnChangeVar += new OnVarChange(cpuWatcher1_OnChangeVar);
             w.OnCPUConnect += new OnCPUConnect(this.cpuWatcher1_OnCPUConnect);
             w.OnCPUConnectError += new OnCPUConnectError(this.cpuWatcher1_OnCPUConnectError);
             components.Add(w);
             w.Activate();
             watchers.Add(srvname, components.Components.Count - 1);
+            if (Hosters == null) Hosters = new Dictionary<string, ClientInfo>();
+            Hosters.Add(cmd.servname, cmd.clientinfo);
             return true;
         }
 
@@ -210,10 +213,9 @@ namespace PVIBroker
             switch (cmd.cmdtype)
             {
                 case "addservice":
-                    addCPUWatcher_TCPIP(cmd.servname, cmd.TcpIpSettings.DestinationIpAddress, cmd.TcpIpSettings.DestinationPort);
+                    addCPUWatcher_TCPIP(cmd,cmd.servname, cmd.TcpIpSettings.DestinationIpAddress, cmd.TcpIpSettings.DestinationPort);
                     QConnQueries.Remove(lastkey);
-                    if (Hosters == null) Hosters = new Dictionary<string, ClientInfo>();
-                    Hosters.Add(cmd.servname, cmd.clientinfo);
+                    
                     break;
                 case "addvar":
                     if (!watchers.ContainsKey(cmd.servname)) break;

@@ -22,5 +22,6 @@ namespace LibPVITree
         public Serial SerialSettings;
 
         public ClientInfo clientinfo;           // данные о клиенте
+        public string SubsUrl;                  // узел сервера для подписки
     }
 }

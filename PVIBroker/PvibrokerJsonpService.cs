@@ -54,6 +54,7 @@ namespace PVIBroker
             pvibc.servname = srvname;
             pvibc.clientinfo = GetClientInfo();
             pvibc.clientinfo._protected = pmode;
+            pvibc.SubsUrl = subspage;
             Form1.QConnQueries.Add(srvname, pvibc);
             return true;
         }
@@ -66,6 +67,7 @@ namespace PVIBroker
         public int srv_status(string srvname) 
         {
             // Защита
+            /*
             ClientInfo ci = GetClientInfo();
             if (Form1.Hosters == null) return -1;
             if (!Form1.Hosters.ContainsKey(srvname)) return -1;
@@ -73,7 +75,7 @@ namespace PVIBroker
             {
                 if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
                     return -1;
-            }
+            }*/
             // Конец защиты
             if (Form1.ConnStatus == null) return -1;
             if (!Form1.ConnStatus.ContainsKey(srvname)) return -1;
@@ -117,14 +119,14 @@ namespace PVIBroker
         public int watch_var(string srvname, string varname)
         {
             // Защита
-            if (Form1.Hosters == null) return -1;
+            /*if (Form1.Hosters == null) return -1;
             if (!Form1.Hosters.ContainsKey(srvname)) return -1;
             ClientInfo ci = GetClientInfo();
             if (Form1.Hosters[srvname]._protected)
             {
                 if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
                     return -1;
-            }
+            }*/
             // Конец защиты
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
             pvibc.cmdtype = "addvar";

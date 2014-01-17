@@ -1,6 +1,7 @@
 ﻿using BR.AN.PviServices;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net;
 
 namespace Broker
 {
@@ -46,12 +47,20 @@ namespace Broker
         /// </summary>
         void ValueChanged(object sender, VariableEventArgs e)
         {
+            if (SubsPage != "")
+            { 
+                        
+            }
             if(OnChangeVar_hndlr!=null)
                 OnChangeVar_hndlr((Variable)sender,this.Srvname);
           /*  Variable var = (Variable)sender;
             Console.WriteLine("Value={0}", var.Value.ToString());
             Application.Exit();*/
         }
+
+        [DisplayName("Сервер подписки")]
+        [Description("Куда отправлять подписные сообщения")]
+        public string SubsPage { get; set; }
 
         void service_Connected(object sender, PviEventArgs e)
         {
