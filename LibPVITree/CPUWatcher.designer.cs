@@ -6,6 +6,7 @@ using System.Net;
 namespace Broker
 {
     public delegate void OnVarChange(Variable var, string servname);
+    public delegate void OnServiceConnect(CPUWatcher w, string servname);
     public delegate void OnCPUConnect(CPUWatcher w, string servname);
     public delegate void OnCPUConnectError(CPUWatcher w, string servname, int Errcode);
 
@@ -65,7 +66,7 @@ namespace Broker
         void service_Connected(object sender, PviEventArgs e)
         {
            // Console.WriteLine("Service Connected Error=" + e.ErrorCode.ToString());
-            if(cpu==null)
+            //if(cpu==null)
                 cpu = new Cpu(service, "Cpu");
             //cpu.Connection.DeviceType = DeviceType.Serial;
             cpu.Connection.DeviceType = DeviceType.TcpIp;
@@ -85,6 +86,7 @@ namespace Broker
         public Dictionary<string, Variable> VarDict;
         void cpu_Connected(object sender, PviEventArgs e)
         {
+            if (e.ErrorCode > 0) return;
             if (this.OnCPUConnect_hndlr != null)
                 this.OnCPUConnect_hndlr(this, this.Srvname);
             f_connected = true;
@@ -92,13 +94,13 @@ namespace Broker
             if(VarNames!=null)
             foreach(string varname in VarNames)
             {
-            Variable variable = new Variable(cpu, varname);
-            variable.Active = true;
-            variable.ValueChanged += new VariableEventHandler(ValueChanged);
-         //   variable.Connected += new PviEventHandler(variable_Connected);
-           // Console.WriteLine("Connecting Variable ...");
-            VarDict.Add(varname,variable);
-            variable.Connect();            
+                Variable variable = new Variable(cpu, varname);
+                variable.Active = true;
+                variable.ValueChanged += new VariableEventHandler(ValueChanged);
+             //   variable.Connected += new PviEventHandler(variable_Connected);
+               // Console.WriteLine("Connecting Variable ...");
+                VarDict.Add(varname,variable);
+                variable.Connect();            
             }
         }
 
@@ -161,13 +163,32 @@ namespace Broker
                 
             }*/
         }
-
+        // Выполнить цепочку подключению
         public void Activate()
         {
-            service = new Service(this.fSrvname);
+            if(service==null)
+                service = new Service(this.fSrvname);
             service.Error += new PviEventHandler(Error);
             service.Connected += new PviEventHandler(service_Connected);
-            service.Connect();
+            if (!service.IsConnected)
+                service.Connect();
+            else
+            {
+                service.RefreshPviClientsList();
+                
+                if (cpu != null)
+                    cpu.Remove();
+                cpu = new Cpu(service, "Cpu");
+                //cpu.Connection.DeviceType = DeviceType.Serial;
+                cpu.Connection.DeviceType = DeviceType.TcpIp;
+                cpu.Connection.TcpIp.DestinationIpAddress = this.IP;
+                cpu.Connection.TcpIp.DestinationPort = short.Parse(this.Port.ToString());
+                //cpu.Connection.Serial.Channel = 1;
+                cpu.Connected += new PviEventHandler(cpu_Connected);
+                cpu.Error += new PviEventHandler(cpu_Error);
+                //Console.WriteLine("Connecting Cpu ...");
+                cpu.Connect();
+            }
         }
 
         private OnVarChange OnChangeVar_hndlr;
@@ -177,6 +198,15 @@ namespace Broker
         {
             add { lock (this) { OnChangeVar_hndlr += value; } }
             remove { lock (this) { OnChangeVar_hndlr -= value; } }
+        }
+
+        private OnServiceConnect OnServiceConnect_hndlr;
+        [DisplayName("При коннекте к PVIMonitor")]
+        [Description("Если окончательно сконнектилось с PVIMonitor")]
+        public event OnServiceConnect OnServiceConnect
+        { 
+            add { lock (this) { OnServiceConnect_hndlr += value; } }
+            remove { lock (this) { OnServiceConnect_hndlr -= value; } }
         }
 
         private OnCPUConnect OnCPUConnect_hndlr;

@@ -68,6 +68,11 @@ namespace PVIBroker
         public static Dictionary<string, Variable> Varlist;
         public static Dictionary<string, bool> Changed; // изменилось значение
 
+        private void cpuWatcher1_ServiceOnConnect(CPUWatcher w, string servname)
+        {
+            this.tbConsole.Text += servname+" reoriented with PVIManager \r\n";
+        }
+
         private void cpuWatcher1_OnChangeVar(Variable var,string servname)
         {
             first_start = false;
@@ -104,21 +109,35 @@ namespace PVIBroker
         private bool addCPUWatcher_TCPIP(PVIBCommand cmd,string srvname, string ip, int port)
         {
             if (watchers == null) watchers = new Dictionary<string, int>();
-            if (watchers.ContainsKey(srvname)) return false;
-            CPUWatcher w = new CPUWatcher();
-            w.IP = ip;
-            w.Port = port;
-            w.Srvname = srvname;
-            w.SubsPage = cmd.SubsUrl;
-            w.OnChangeVar += new OnVarChange(cpuWatcher1_OnChangeVar);
-            w.OnCPUConnect += new OnCPUConnect(this.cpuWatcher1_OnCPUConnect);
-            w.OnCPUConnectError += new OnCPUConnectError(this.cpuWatcher1_OnCPUConnectError);
-            components.Add(w);
-            w.Activate();
-            watchers.Add(srvname, components.Components.Count - 1);
-            if (Hosters == null) Hosters = new Dictionary<string, ClientInfo>();
-            Hosters.Add(cmd.servname, cmd.clientinfo);
-            return true;
+            if (!watchers.ContainsKey(srvname))
+            {
+                CPUWatcher w = new CPUWatcher();
+                w.IP = ip;
+                w.Port = port;
+                w.Srvname = srvname;
+                w.SubsPage = cmd.SubsUrl;
+                w.OnChangeVar += new OnVarChange(cpuWatcher1_OnChangeVar);
+                w.OnServiceConnect += new OnServiceConnect(cpuWatcher1_ServiceOnConnect);
+                w.OnCPUConnect += new OnCPUConnect(this.cpuWatcher1_OnCPUConnect);
+                w.OnCPUConnectError += new OnCPUConnectError(this.cpuWatcher1_OnCPUConnectError);
+                components.Add(w);
+                w.Activate();
+                watchers.Add(srvname, components.Components.Count - 1);
+                if (Hosters == null) Hosters = new Dictionary<string, ClientInfo>();
+                Hosters.Add(cmd.servname, cmd.clientinfo);
+
+                tbConsole.Text = tbConsole.Text + "Added service " + cmd.servname + " with address "+w.IP+":"+w.Port+"\r\n";
+                return true;
+            }
+            else
+            {
+                CPUWatcher w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
+                w.IP = ip;
+                w.Port = port;
+                w.Activate();
+                tbConsole.Text = tbConsole.Text + "Service " + cmd.servname + " reconnected to address " + w.IP + ":" + w.Port + "\r\n";
+                return true;
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -224,6 +243,8 @@ namespace PVIBroker
         private void timer1_Tick(object sender, EventArgs e)
         {
             DrawMessBuff();
+            if (watchers == null)
+                watchers = new Dictionary<string, int>();
             if (QConnQueries == null) QConnQueries = new Dictionary<string, PVIBCommand>();
             if (QConnQueries.Count == 0) return;
             string lastkey = "";           
@@ -237,9 +258,9 @@ namespace PVIBroker
                 case "addservice":
                     addCPUWatcher_TCPIP(cmd,cmd.servname, cmd.TcpIpSettings.DestinationIpAddress, cmd.TcpIpSettings.DestinationPort);
                     QConnQueries.Remove(lastkey);
-                    tbConsole.Text = tbConsole.Text + "Added service " + cmd.servname + "\r\n";
+                    
                     break;
-                case "addvar":
+                case "addvar":                    
                     if (!watchers.ContainsKey(cmd.servname)) break;
                     w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
                     if (w.isConnected)
@@ -273,6 +294,7 @@ namespace PVIBroker
                 ConnStatus[servname] = 0;
             else
                 ConnStatus.Add(servname, 0);
+            this.tbConsole.Text += servname + " connected with CPU \r\n";
         }
 
         private void cpuWatcher1_OnCPUConnectError(CPUWatcher w, string servname, int Errcode)
@@ -283,6 +305,7 @@ namespace PVIBroker
                 ConnStatus[servname] = Errcode;
             else
                 ConnStatus.Add(servname, Errcode);
+            this.tbConsole.Text += servname + " CPU connection error "+Errcode.ToString()+" \r\n";
         }
         
         

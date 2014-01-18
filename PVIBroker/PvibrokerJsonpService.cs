@@ -130,7 +130,7 @@ namespace PVIBroker
                     return -1;
             }*/
             // Конец защиты
-            Form1.AddMess("Query to wathch variable "+varname+" to service "+srvname);
+            Form1.AddMess("Query to watch variable "+varname+" to service "+srvname);
             
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
             pvibc.cmdtype = "addvar";
