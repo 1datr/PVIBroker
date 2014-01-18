@@ -203,21 +203,21 @@ namespace PVIBroker
         private static List<String> MessList;
         public static void AddMess(String mes)
         {
-            if(MessList==null) MessList = new List<string>();
-            MessList.Add(mes);
+            if (MessList == null) MessList = new List<string>();
+            MessList.Add(mes);            
         }
 
         private void DrawMessBuff()
         {
             lock(this){
-            if (MessList != null)
-            {
-                foreach (string mess in MessList)
+                if (MessList != null)
                 {
-                    tbConsole.Text = tbConsole.Text + mess + "\r\n";
+                    for(int i=0;i<MessList.Count;i++)
+                    {
+                        tbConsole.Text = tbConsole.Text + MessList[i]+ "\r\n";
+                    }
+                    MessList.Clear();
                 }
-                MessList.Clear();
-            }
             }
         }
         // Таймер. По таймеру обрабатываются основные команды
@@ -237,7 +237,7 @@ namespace PVIBroker
                 case "addservice":
                     addCPUWatcher_TCPIP(cmd,cmd.servname, cmd.TcpIpSettings.DestinationIpAddress, cmd.TcpIpSettings.DestinationPort);
                     QConnQueries.Remove(lastkey);
-                    tbConsole.Text = tbConsole.Text + "\r\n" + "Added service " + cmd.servname;
+                    tbConsole.Text = tbConsole.Text + "Added service " + cmd.servname + "\r\n";
                     break;
                 case "addvar":
                     if (!watchers.ContainsKey(cmd.servname)) break;
@@ -245,7 +245,7 @@ namespace PVIBroker
                     if (w.isConnected)
                     {
                         w.AddVar(cmd.varname);
-                        tbConsole.Text = tbConsole.Text + "\r\n" + "Added variable "+cmd.varname+" to service "+cmd.servname;
+                        tbConsole.Text = tbConsole.Text + "Added variable " + cmd.varname + " to service " + cmd.servname + "\r\n";
                         QConnQueries.Remove(lastkey);
                     }
                     break;
@@ -257,7 +257,7 @@ namespace PVIBroker
                     this.components.Remove(w);
                     watchers.Remove(cmd.servname);
                     QConnQueries.Remove(lastkey);
-                    tbConsole.Text = tbConsole.Text + "\n\r" + "Aborted service " + cmd.servname;
+                    tbConsole.Text = tbConsole.Text + "Aborted service " + cmd.servname + "\r\n";
                     // надо чтобы менялись номера в watches
                     break;
             }
