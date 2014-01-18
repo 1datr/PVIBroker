@@ -42,7 +42,7 @@ namespace PVIBroker
         // Создать сервак с коннектом по TCP
         public bool mkserv_tcpip(string srvname, string ip, int port, bool pmode = true, string subspage = "")
         {
-            
+            Form1.AddMess("Query to create service " + srvname + " on " + ip.ToString() + ":" + port.ToString());
             // инициализировать очередь команд
             if (Form1.QConnQueries == null)
                 Form1.QConnQueries = new Dictionary<string, LibPVITree.PVIBCommand>();
@@ -77,6 +77,7 @@ namespace PVIBroker
                     return -1;
             }*/
             // Конец защиты
+            Form1.AddMess("Query to get status on service " + srvname);
             if (Form1.ConnStatus == null) return -1;
             if (!Form1.ConnStatus.ContainsKey(srvname)) return -1;
             return Form1.ConnStatus[srvname];
@@ -84,6 +85,7 @@ namespace PVIBroker
 
         public bool endservice(string srvname)
         {
+            Form1.AddMess("Query to terminate service " + srvname);
             // Защита
             if (Form1.Hosters == null) return false;
             if (!Form1.Hosters.ContainsKey(srvname)) return false;
@@ -128,6 +130,8 @@ namespace PVIBroker
                     return -1;
             }*/
             // Конец защиты
+            Form1.AddMess("Query to wathch variable "+varname+" to service "+srvname);
+            
             PVIBCommand pvibc = new LibPVITree.PVIBCommand();
             pvibc.cmdtype = "addvar";
             pvibc.varname = varname;
