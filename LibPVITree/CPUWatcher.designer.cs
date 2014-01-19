@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
+using System.Text;
+using System.Web;
+
+
 
 namespace Broker
 {
@@ -39,8 +43,22 @@ namespace Broker
         /// 
         void Error(object sender, PviEventArgs e)
         {
-           // Console.WriteLine(String.Format("Error:{0}", e.ErrorText));
-            //Application.Exit();
+            // отчитаться субскрайберу о коннекте
+            if (this.SubsPage != "")
+            {
+                WebRequest reqPOST = System.Net.WebRequest.Create(this.SubsPage);
+                reqPOST.Method = "POST"; // Устанавливаем метод передачи данных в POST
+                reqPOST.Timeout = 120000; // Устанавливаем таймаут соединения
+                reqPOST.ContentType = "application/x-www-form-urlencoded"; // указываем тип контента
+                // передаем список пар параметров / значений для запрашиваемого скрипта методом POST
+                // здесь используется кодировка cp1251 для кодирования кирилицы и спец. символов в значениях параметров
+                // Если скрипт должен принимать данные в utf-8, то нужно выбрать Encodinf.UTF8
+                byte[] sentData = Encoding.GetEncoding(1251).GetBytes("service=" + this.Srvname + "&result=" + e.ErrorCode + ":" + e.ErrorText + "&event=srv_connection_error");
+                reqPOST.ContentLength = sentData.Length;
+                System.IO.Stream sendStream = reqPOST.GetRequestStream();
+                sendStream.Write(sentData, 0, sentData.Length);
+                sendStream.Close();
+            }
         }
 
         /// <summary>
@@ -65,8 +83,23 @@ namespace Broker
 
         void service_Connected(object sender, PviEventArgs e)
         {
+            if ((this.SubsPage != "")&&(e.ErrorCode==0))
+            {
+                WebRequest reqPOST = System.Net.WebRequest.Create(this.SubsPage);
+                reqPOST.Method = "POST"; // Устанавливаем метод передачи данных в POST
+                reqPOST.Timeout = 120000; // Устанавливаем таймаут соединения
+                reqPOST.ContentType = "application/x-www-form-urlencoded"; // указываем тип контента
+                // передаем список пар параметров / значений для запрашиваемого скрипта методом POST
+                // здесь используется кодировка cp1251 для кодирования кирилицы и спец. символов в значениях параметров
+                // Если скрипт должен принимать данные в utf-8, то нужно выбрать Encodinf.UTF8
+                byte[] sentData = Encoding.GetEncoding(1251).GetBytes("service="+this.Srvname+"&result="+e.ErrorCode+"&event=service_connected");
+                reqPOST.ContentLength = sentData.Length;
+                System.IO.Stream sendStream = reqPOST.GetRequestStream();
+                sendStream.Write(sentData, 0, sentData.Length);
+                sendStream.Close();
+            }
            // Console.WriteLine("Service Connected Error=" + e.ErrorCode.ToString());
-            //if(cpu==null)
+            if(cpu==null)
                 cpu = new Cpu(service, "Cpu");
             //cpu.Connection.DeviceType = DeviceType.Serial;
             cpu.Connection.DeviceType = DeviceType.TcpIp;
@@ -86,6 +119,23 @@ namespace Broker
         public Dictionary<string, Variable> VarDict;
         void cpu_Connected(object sender, PviEventArgs e)
         {
+            // отчитаться субскрайберу о коннекте
+            if ((this.SubsPage != "")&&(e.ErrorCode==0))
+            {
+                WebRequest reqPOST = System.Net.WebRequest.Create(this.SubsPage);
+                reqPOST.Method = "POST"; // Устанавливаем метод передачи данных в POST
+                reqPOST.Timeout = 120000; // Устанавливаем таймаут соединения
+                reqPOST.ContentType = "application/x-www-form-urlencoded"; // указываем тип контента
+                // передаем список пар параметров / значений для запрашиваемого скрипта методом POST
+                // здесь используется кодировка cp1251 для кодирования кирилицы и спец. символов в значениях параметров
+                // Если скрипт должен принимать данные в utf-8, то нужно выбрать Encodinf.UTF8
+                byte[] sentData = Encoding.GetEncoding(1251).GetBytes("service=" + this.Srvname + "&result=" + e.ErrorCode + "&event=cpu_connected");
+                reqPOST.ContentLength = sentData.Length;
+                System.IO.Stream sendStream = reqPOST.GetRequestStream();
+                sendStream.Write(sentData, 0, sentData.Length);
+                sendStream.Close();
+            }
+
             if (e.ErrorCode > 0) return;
             if (this.OnCPUConnect_hndlr != null)
                 this.OnCPUConnect_hndlr(this, this.Srvname);
@@ -106,6 +156,23 @@ namespace Broker
 
         void cpu_Error(object sender, PviEventArgs e)
         {
+            // отчитаться субскрайберу о коннекте
+            if (this.SubsPage != "")
+            {
+                WebRequest reqPOST = System.Net.WebRequest.Create(this.SubsPage);
+                reqPOST.Method = "POST"; // Устанавливаем метод передачи данных в POST
+                reqPOST.Timeout = 120000; // Устанавливаем таймаут соединения
+                reqPOST.ContentType = "application/x-www-form-urlencoded"; // указываем тип контента
+                // передаем список пар параметров / значений для запрашиваемого скрипта методом POST
+                // здесь используется кодировка cp1251 для кодирования кирилицы и спец. символов в значениях параметров
+                // Если скрипт должен принимать данные в utf-8, то нужно выбрать Encodinf.UTF8
+                byte[] sentData = Encoding.GetEncoding(1251).GetBytes("service=" + this.Srvname + "&result=" + e.ErrorCode + ":" + e.ErrorText + "&event=cpu_connection_error");
+                reqPOST.ContentLength = sentData.Length;
+                System.IO.Stream sendStream = reqPOST.GetRequestStream();
+                sendStream.Write(sentData, 0, sentData.Length);
+                sendStream.Close();
+            }
+
             f_connected = false;
             if (this.OnCPUConnectError_hndlr!=null)
                 this.OnCPUConnectError_hndlr(this, this.Srvname, e.ErrorCode);

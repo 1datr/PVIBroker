@@ -20,4 +20,25 @@
     </SelectedNodes>
     <ZoomIndices />
   </TreeView>
+  <TreeView ID="C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Logical\Global.typ" EditColumn="0" TopRow="0" HorizontalScrollOffset="0" SortedColumn="0">
+    <Columns>
+      <Column Index="0" Width="200" Position="0" />
+      <Column Index="1" Width="100" Position="1" />
+      <Column Index="2" Width="110" Position="2" />
+      <Column Index="3" Width="64" Position="3" />
+      <Column Index="4" Width="200" Position="4" />
+      <Column Index="5" Width="0" Position="5" />
+      <Column Index="6" Width="0" Position="6" />
+      <Column Index="7" Width="0" Position="7" />
+    </Columns>
+    <ExpandedNodes>
+      <ExpandedNode Row="1" />
+      <ExpandedNode Row="5" />
+      <ExpandedNode Row="17" />
+    </ExpandedNodes>
+    <SelectedNodes>
+      <SelectedNode Row="1" />
+    </SelectedNodes>
+    <ZoomIndices />
+  </TreeView>
 </State>
