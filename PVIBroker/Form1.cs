@@ -110,7 +110,7 @@ namespace PVIBroker
         {
             if (watchers == null) watchers = new Dictionary<string, int>();
             if (!watchers.ContainsKey(srvname))
-            {
+            {                
                 CPUWatcher w = new CPUWatcher();
                 w.IP = ip;
                 w.Port = port;
@@ -132,6 +132,7 @@ namespace PVIBroker
             else
             {
                 CPUWatcher w = (CPUWatcher)this.components.Components[this.watchers[cmd.servname]];
+                if (w.isConnected) return false;
                 w.IP = ip;
                 w.Port = port;
                 w.Activate();

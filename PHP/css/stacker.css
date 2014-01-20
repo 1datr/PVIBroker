@@ -1,0 +1,119 @@
+body {
+	padding:10px;
+	
+}
+#div_content {
+	width: 1027px;	
+}
+
+#div_sidebar {
+	width: 300px;
+	margin-left: -1px;	
+}
+
+#coords_box {
+	display: inline;
+	
+}
+
+#coords_box>span {
+	text-align: right;
+}
+
+#rails {
+	height:20px;
+	background-color: #eeffee;
+/*	margin:0 2 0 2;*/
+	border: 1px dotted;
+}
+
+#stacker_table {
+	border-spacing: 2px; /* Расстояние между границ */
+	border-collapse: separate;
+	font-size:15px;
+}
+
+td.cell {
+	border: 1px solid;
+	/*margin:4px;*/
+	/*width: 10px;
+	height: 10px;*/
+}
+
+td.cell_occupied {
+	border: 1px solid;
+	background-color: #ffddff;
+}
+
+td.cell_poddon {
+	
+	background-image: url('/img/bg_poddon.png');
+	background-repeat: no-repeat;
+}
+
+td.cell_empty {
+	border:none;
+}
+
+td.cell a {
+	text-decoration:none;
+	display:block;
+}
+
+td.cell_bordered {
+	border-right: 2px solid;
+	/*margin-right:5px;*/
+}
+
+td.cell_bordered_left {
+	border-left: 2px solid;
+	/*margin-right:5px;*/
+}
+
+#products #cell {
+	background-color: #ffcccc;
+	font-weight: bold;
+	display:block;		
+}
+
+#products #prodlist {
+	overflow: auto;
+	min-width: 100%;
+	/*min-height: 355px;*/
+}
+
+.frm_saverec {
+	margin-bottom:-10px;
+}
+
+.small_button {
+	width:15px;
+	height:15px;
+	float:left;
+	padding:2px;
+}
+
+table.rack_up, 
+table.rack_down{
+	border-spacing: 4;
+	border-collapse: separate;
+	border: 2px solid;
+}
+
+table.rack_up tr,
+table.rack_down tr {
+	min-height: 35px;
+}
+
+table.rack_up tr td,
+table.rack_down tr td {
+	margin:5px;
+	border: 1px solid;
+	min-width: 35px;
+	min-height: 35px;
+	text-align: center; 
+}
+
+.stacker_rails {
+	background-color: #ddeeff;
+}

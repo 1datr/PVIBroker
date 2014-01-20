@@ -66,9 +66,22 @@ namespace Broker
         /// </summary>
         void ValueChanged(object sender, VariableEventArgs e)
         {
-            if (SubsPage != "")
-            { 
-                        
+            // отчитаться субскрайберу о коннекте
+            if (this.SubsPage != "")
+            {
+                WebRequest reqPOST = System.Net.WebRequest.Create(this.SubsPage);
+                reqPOST.Method = "POST"; // Устанавливаем метод передачи данных в POST
+                reqPOST.Timeout = 120000; // Устанавливаем таймаут соединения
+                reqPOST.ContentType = "application/x-www-form-urlencoded"; // указываем тип контента
+                // передаем список пар параметров / значений для запрашиваемого скрипта методом POST
+                // здесь используется кодировка cp1251 для кодирования кирилицы и спец. символов в значениях параметров
+                // Если скрипт должен принимать данные в utf-8, то нужно выбрать Encodinf.UTF8
+                Variable Var = (Variable)sender;
+                byte[] sentData = Encoding.GetEncoding(1251).GetBytes("service=" + this.Srvname + "&varname=" + Var.Name + "&value="+Var.Value.ToString()+"&event=srv_var_changed");
+                reqPOST.ContentLength = sentData.Length;
+                System.IO.Stream sendStream = reqPOST.GetRequestStream();
+                sendStream.Write(sentData, 0, sentData.Length);
+                sendStream.Close();
             }
             if(OnChangeVar_hndlr!=null)
                 OnChangeVar_hndlr((Variable)sender,this.Srvname);
@@ -233,26 +246,32 @@ namespace Broker
         // Выполнить цепочку подключению
         public void Activate()
         {
-            if(service==null)
+            if (service != null)
+            {
+                //service.Disconnect();
+            }
+            else
+            {
                 service = new Service(this.fSrvname);
-            service.Error += new PviEventHandler(Error);
-            service.Connected += new PviEventHandler(service_Connected);
+                service.Error += new PviEventHandler(Error);
+                service.Connected += new PviEventHandler(service_Connected);
+            }
             if (!service.IsConnected)
                 service.Connect();
             else
             {
                 service.RefreshPviClientsList();
-                
-                if (cpu != null)
-                    cpu.Remove();
-                cpu = new Cpu(service, "Cpu");
-                //cpu.Connection.DeviceType = DeviceType.Serial;
+
+                if (cpu == null)
+                    cpu = new Cpu(service, "Cpu");
+                    //cpu.Connection.DeviceType = DeviceType.Serial;
                 cpu.Connection.DeviceType = DeviceType.TcpIp;
                 cpu.Connection.TcpIp.DestinationIpAddress = this.IP;
                 cpu.Connection.TcpIp.DestinationPort = short.Parse(this.Port.ToString());
-                //cpu.Connection.Serial.Channel = 1;
+                    //cpu.Connection.Serial.Channel = 1;
                 cpu.Connected += new PviEventHandler(cpu_Connected);
                 cpu.Error += new PviEventHandler(cpu_Error);
+
                 //Console.WriteLine("Connecting Cpu ...");
                 cpu.Connect();
             }
