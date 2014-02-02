@@ -1,8 +1,3 @@
-<?php
-//require_once './br_api/index.php';
-require_once './pvib_api/index.php';
-?>
-
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/css/stacker.css" media="screen" />
@@ -18,6 +13,27 @@ require_once './pvib_api/index.php';
 
 <script type="text/javascript" src="js/jquery-1.4.2.min.js" ></script>
 <script>
+function print_r(arr, level) {
+    var print_red_text = "";
+    if(!level) level = 0;
+    var level_padding = "";
+    for(var j=0; j<level+1; j++) level_padding += "    ";
+    if(typeof(arr) == 'object') {
+        for(var item in arr) {
+            var value = arr[item];
+            if(typeof(value) == 'object') {
+                print_red_text += level_padding + "'" + item + "' :\n";
+                print_red_text += print_r(value,level+1);
+		} 
+            else 
+                print_red_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+        }
+    } 
+
+    else  print_red_text = "===>"+arr+"<===("+typeof(arr)+")";
+    return print_red_text;
+}
+
 $(document).ready(function() {
 	  // Handler for .ready() called.
 
@@ -28,10 +44,15 @@ $(document).ready(function() {
 		{
 	  		$("#PosX").html("X");
 			  $.ajax({
-	              url: '/getvar.php?var=gOPC.Output.Xpos',
+	              url: '/getvar.php?vars=gOPC.Output.Xpos,gOPC.Output.Ypos,gOPC.Output.Zpos',
 	              success: function (data) {
-		              //alert(data);
-	                  $("#PosX").html(data);
+	            	
+		             // $("#print_r_div").html(print_r(data["gOPC.Output.Xpos"]));
+		              data = eval("(" + data + ")");
+					 
+	                  $("#PosX").html(data["gOPC.Output.Xpos"]);
+	                  $("#PosY").html(data["gOPC.Output.Ypos"]);
+	                  $("#PosZ").html(data["gOPC.Output.Zpos"]);
 	                  timerMulti = setTimeout(Timer, 5000);
 	              },
 	              dataType: 'text'
@@ -58,15 +79,7 @@ curl_setopt($curl, CURLOPT_TIMEOUT,2);
 $out = curl_exec($curl);
 */
 
-$pvib = new pvib_client();
 
-if(($err= $pvib->connect_tcpip("srv1",$PVIBhost,$PLCIP,$PLCPORT))!="0")
-{
-	echo "No connection to the PLC ";
-	$pvib->connect_tcpip("srv1",$PVIBhost,"127.0.0.1",11160);
-	echo $pvib->cpu_connected();
-	echo "connected to local";
-}
 
 $pvib->addvar("gOPC.Output.Xpos");
 $pvib->addvar("gOPC.Output.Ypos");
@@ -102,6 +115,7 @@ $pvib->addvar("gOPC.Input.power");
 ?>
 <title>¿–Ã “Ë‡‡</title>
 <body>
+<div id="print_r_div"></div>
 	<div class="row-fluid">¿–Ã “»¿–¿</div>
 	<div class="row-fluid">
  		<div class="tabbable"> <!-- Only required for left/right tabs -->

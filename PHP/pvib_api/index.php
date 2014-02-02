@@ -58,7 +58,9 @@ class pvib_client {
 		{
 			include "./subsdata/".$this->service.".php";
 		//	echo file_get_contents("./subsdata/".$this->service.".php");
-		}
+		} 
+		else 
+			return -1;
 		if(empty($_SRVINFO)) return -1;
 		//print_r($_SRVINFO);
 		if($_SRVINFO['cpu_connected']==TRUE) return  0;
@@ -126,13 +128,48 @@ class pvib_client {
 	}
 	
 	public function getvar($varname) {
-		$curl = curl_init();
+		/*$curl = curl_init();
 		if(!curl)
 			break;
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 		curl_setopt($curl, CURLOPT_URL,$this->url."/get_var/?srvname=".$this->service."&varname=$varname");
 		$out = curl_exec($curl);
 		return json_decode($out);
+		
+		*/
+		//echo "./subsdata/".$this->service.".php";
+		if(file_exists("./subsdata/".$this->service.".php"))
+		{
+			include "./subsdata/".$this->service.".php";
+			//print_r($_SRVINFO);
+			
+			if(empty($_SRVINFO['VARS'][$varname]))
+			{
+				$curl = curl_init();
+				//echo $this->url."/get_var/?srvname=".$this->service."&varname=$varname<br />";
+				if(!curl)
+					break;
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+				curl_setopt($curl, CURLOPT_URL,$this->url."/get_var/?srvname=".$this->service."&varname=$varname");
+				$out = curl_exec($curl);
+				return json_decode($out);		
+			}
+			else 
+			{				
+				return $_SRVINFO['VARS'][$varname];
+			}
+		}
+		else
+		{
+			$curl = curl_init();
+			if(!curl)
+				break;
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+			curl_setopt($curl, CURLOPT_URL,$this->url."/get_var/?srvname=".$this->service."&varname=$varname");
+			echo $this->url."/get_var/?srvname=".$this->service."&varname=$varname";
+			$out = curl_exec($curl);
+			return json_decode($out);
+		}
 		
 	}
 	

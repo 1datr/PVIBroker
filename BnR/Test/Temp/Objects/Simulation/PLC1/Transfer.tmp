@@ -14,15 +14,15 @@
     </Mod>
   </Cat>
   <Cat Name="Configuration Objects" Img="Configuration.ico">
-    <Mod Name="ashwd" Img="files\BR.ico" Stat="Different" Act="Download" Res="Warm">
+    <Mod Name="ashwd" Img="files\BR.ico" Stat="Equal" Act="Ignore" Res="Warm">
     </Mod>
-    <Mod Name="asfw" Img="files\BR.ico" Stat="Different" Act="Download" Res="Warm">
+    <Mod Name="asfw" Img="files\BR.ico" Stat="Equal" Act="Ignore" Res="Warm">
     </Mod>
-    <Mod Name="arconfig" Img="files\rtc.ico" Stat="Different" Act="Download" Res="Warm">
+    <Mod Name="arconfig" Img="files\rtc.ico" Stat="Equal" Act="Ignore" Res="Warm">
     </Mod>
-    <Mod Name="sysconf" Img="files\BR.ico" Stat="Different" Act="Download" Res="Warm">
+    <Mod Name="sysconf" Img="files\BR.ico" Stat="Equal" Act="Ignore" Res="Warm">
     </Mod>
-    <Mod Name="iomap" Img="files\iom.ico" Stat="Different" Act="Download">
+    <Mod Name="iomap" Img="files\iom.ico" Stat="Equal" Act="Ignore">
     </Mod>
   </Cat>
 </Transfer>

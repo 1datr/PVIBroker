@@ -5,8 +5,8 @@
     <IECNamingConvention>true</IECNamingConvention>
     <IecKeywordsAsStructureMembers>false</IecKeywordsAsStructureMembers>
     <IecExtendedConstants>true</IecExtendedConstants>
-    <ProjectLogicalDirectory>C:\projects\test\Logical\</ProjectLogicalDirectory>
-    <ProjectTempDirectory>C:\projects\test\Temp\</ProjectTempDirectory>
+    <ProjectLogicalDirectory>C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Logical\</ProjectLogicalDirectory>
+    <ProjectTempDirectory>C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Temp\</ProjectTempDirectory>
     <ASVersion>3.0.90.20 SP02</ASVersion>
     <Edition>Standard</Edition>
     <CrossReference>false</CrossReference>

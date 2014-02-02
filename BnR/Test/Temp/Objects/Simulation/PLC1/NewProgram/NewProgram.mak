@@ -1,5 +1,5 @@
-UnmarkedObjectFolder := C:/projects/test/Logical/NewProgram
-MarkedObjectFolder := C:/projects/test/Logical/NewProgram
+UnmarkedObjectFolder := C:/Users/anton/Documents/Visual Studio 2010/Projects/PviBroker/BnR/Test/Logical/NewProgram
+MarkedObjectFolder := C:/Users/anton/Documents/Visual\ Studio\ 2010/Projects/PviBroker/BnR/Test/Logical/NewProgram
 
 $(AS_CPU_PATH)/NewProgram.br: \
 	$(AS_PROJECT_PATH)/Physical/$(AS_CONFIGURATION)/$(AS_PLC)/Cpu.per \

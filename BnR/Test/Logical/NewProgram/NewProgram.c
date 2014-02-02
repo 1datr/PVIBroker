@@ -38,7 +38,7 @@ void _INIT NewProgramINIT(void)
 void _CYCLIC NewProgramCYCLIC(void)
 {
 	/* TODO: Add code here */
-	gOPC.Output.Xpos = gOPC.Output.Xpos+0.1;
-	if(gOPC.Output.Xpos>200) gOPC.Output.Xpos=0;
+	gOPC.Output.Xpos = gOPC.Output.Xpos+100;
+	if(gOPC.Output.Xpos>30010) gOPC.Output.Xpos=0;
 	
 }

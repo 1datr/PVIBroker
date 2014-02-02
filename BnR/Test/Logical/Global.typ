@@ -19,9 +19,9 @@ END_TYPE
 
 TYPE
 	StructOutput : 	STRUCT 
-		Xpos : REAL;
-		Ypos : REAL;
-		Zpos : REAL;
+		Xpos : DWORD;
+		Ypos : DWORD;
+		Zpos : DWORD;
 		load : BOOL;
 		DI : BOOL;
 		DOutput : BOOL;

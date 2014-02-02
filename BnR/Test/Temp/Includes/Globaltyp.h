@@ -1,8 +1,8 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
 
-#ifndef _BUR_1387053737_1_
-#define _BUR_1387053737_1_
+#ifndef _BUR_1390408038_1_
+#define _BUR_1390408038_1_
 
 #include <bur/plctypes.h>
 
@@ -15,9 +15,9 @@ typedef struct StructInput
 } StructInput;
 
 typedef struct StructOutput
-{	float Xpos;
-	float Ypos;
-	float Zpos;
+{	plcdword Xpos;
+	plcdword Ypos;
+	plcdword Zpos;
 	plcbit load;
 	plcbit DI;
 	plcbit DOutput;
@@ -47,5 +47,5 @@ __asm__(".ascii \"iecfile \\\"Logical/Global.typ\\\" scope \\\"global\\\"\\n\"")
 __asm__(".previous");
 
 
-#endif /* _BUR_1387053737_1_ */
+#endif /* _BUR_1390408038_1_ */
 

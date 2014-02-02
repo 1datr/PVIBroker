@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio Version=3.0.90.20 SP02?>
 <State Top="0" Left="0" Width="0" Height="0" WindowState="Normal" xmlns="http://br-automation.co.at/AS/State">
+  <TextEdit ID="C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Logical\NewProgram\NewProgram.c" CaretLine="42" CaretColumn="2" FirstVisibleLine="1">
+    <Bookmarks />
+  </TextEdit>
   <TreeView ID="C:\Users\anton\Documents\Visual Studio 2010\Projects\PviBroker\BnR\Test\Logical\Global.var" EditColumn="1" TopRow="0" HorizontalScrollOffset="0" SortedColumn="0">
     <Columns>
       <Column Index="0" Width="200" Position="0" />
@@ -37,7 +40,7 @@
       <ExpandedNode Row="17" />
     </ExpandedNodes>
     <SelectedNodes>
-      <SelectedNode Row="1" />
+      <SelectedNode Row="0" />
     </SelectedNodes>
     <ZoomIndices />
   </TreeView>

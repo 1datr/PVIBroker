@@ -144,14 +144,14 @@ namespace PVIBroker
         public string get_var(string srvname, string varname) 
         {
             // Защита
-            if (Form1.Hosters == null) return null;
+            /*if (Form1.Hosters == null) return null;
             if (!Form1.Hosters.ContainsKey(srvname)) return null;
             ClientInfo ci = GetClientInfo();
             if (Form1.Hosters[srvname]._protected)
             {
                 if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
                     return null;
-            }
+            }*/
             // Конец защиты
             if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
                 return Form1.Varlist[srvname + "_" + varname].Value.ToString();
@@ -162,14 +162,14 @@ namespace PVIBroker
         public int set_var(string srvname, string varname, string varval) 
         {
             // Защита
-            if (Form1.Hosters == null) return -1;
+            /*if (Form1.Hosters == null) return -1;
             if (!Form1.Hosters.ContainsKey(srvname)) return -1;
             ClientInfo ci = GetClientInfo();
             if (Form1.Hosters[srvname]._protected)
             {
                 if ((Form1.Hosters[srvname].ip != ci.ip) || (Form1.Hosters[srvname].port != ci.port))
                     return -1;
-            }
+            }*/
             // Конец защиты
             if (Form1.Varlist.ContainsKey(srvname + "_" + varname))
             {                

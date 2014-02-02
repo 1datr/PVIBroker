@@ -1,0 +1,20 @@
+WATCH Ver=2.00 PLCName=PLC1 CPUName=CPU TaskName=NewProgram 
+Position X=0 Y=0 Width=0 Height=0 TabWidth Name=150 Type=0 Scope=0 Force=0 Index=8 ASCIIString=0
+                                    name                                     type force                                                            value level type len format place expand specs
+                                    gOPC                                 gOPCType    0 "                                                               *"    0   24    1    0    0    1         
+                                   Input                              StructInput    0 "                                                               *"    1   24    1    0    0    1         
+                                   start                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
+                                src_cell                                    USINT    0 "                                                               0"    2    5    1   10    0    0         
+                                dst_cell                                    USINT    0 "                                                               0"    2    5    1   10    0    0         
+                                 command                                    USINT    0 "                                                               0"    2    5    1   10    0    0         
+                                  Output                             StructOutput    0 "                                                               *"    1   24    1    0    0    1        b
+                                    Xpos                                    DWORD    0 "                                                              10"    2   19    1   10    0    0        b
+                                    Ypos                                    DWORD    0 "                                                              12"    2   19    1   10    0    0        b
+                                    Zpos                                    DWORD    0 "                                                               0"    2   19    1   10    0    0        b
+                                    load                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
+                                      DI                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
+                                 DOutput                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
+                                  status                                     UINT    0 "                                                               0"    2    6    1   10    0    0         
+                             drivestatus                                     UINT    0 "                                                               0"    2    6    1   10    0    0         
+                                driveack                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
+                                     ack                                     BOOL    0 "                                                           FALSE"    2    1    1    2    0    0         
